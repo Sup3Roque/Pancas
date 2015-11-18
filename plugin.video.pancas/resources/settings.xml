@@ -1,0 +1,12 @@
+<settings>
+  <category label="ADD M3U-XML PATH & SELECT TV MODE">
+    <setting label="Add URL to Online M3U Playlist" type="text"  id="online_m3u" default="" />
+    <setting label="Add Path to Local M3U Playlist" type="file"  id="local_m3u" default="" /> 
+    <setting label="XML Online " type="text"  id="online_xml" default="" />
+    <setting label="XML Local" type="file"  id="local_xml" default="" /> 
+    <setting type="sep" />	
+    <setting type="sep" />
+    <setting type="sep" />	
+    <setting label="[B]SELECT TV MODE[/B][COLOR red] (REQUIRED)[/COLOR]"  type="select" id="tv_mode" values="Menu Selection Mode|Direct Link Mode" default="Menu Selection Mode" /> 	
+  </category>
+</settings>
