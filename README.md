@@ -1,2 +1,4 @@
-# Pancas
-Here Pancadas TV
+XBMC Plugins 
+=====
+
+Place for my plugin developments. 

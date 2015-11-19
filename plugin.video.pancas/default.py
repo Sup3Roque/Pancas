@@ -51,7 +51,7 @@ history = os.path.join(profile, 'history')
 REV = os.path.join(profile, 'list_revision')
 icon = os.path.join(home, 'icon.png')
 FANART = os.path.join(home, 'fanart.jpg')
-source_file = os.path.join(profile, 'source_file')
+source_file = os.path.join(home, 'source_file')
 functions_dir = profile
 
 communityfiles = os.path.join(profile, 'LivewebTV')
@@ -62,11 +62,8 @@ if os.path.exists(favorites)==True:
 else: FAV = []
 if os.path.exists(source_file)==True:
     SOURCES = open(source_file).read()
-else: addSource("http://pastebin.com/raw.php?i=z8Eb9YcL")
-	  #SOURCES = open(source_file).read()
-if os.path.exists(source_file)==True:
-    SOURCES = open(source_file).read()
 else: SOURCES = []
+
 
 def addon_log(string):
     if debug == 'true':
@@ -86,11 +83,11 @@ def makeRequest(url, headers=None):
             addon_log('URL: '+url)
             if hasattr(e, 'code'):
                 addon_log('We failed with error code - %s.' % e.code)
-                xbmc.executebuiltin("XBMC.Notification(pancas,We failed with error code - "+str(e.code)+",10000,"+icon+")")
+                xbmc.executebuiltin("XBMC.Notification(Pancas,We failed with error code - "+str(e.code)+",10000,"+icon+")")
             elif hasattr(e, 'reason'):
                 addon_log('We failed to reach a server.')
                 addon_log('Reason: %s' %e.reason)
-                xbmc.executebuiltin("XBMC.Notification(pancas,We failed to reach a server. - "+str(e.reason)+",10000,"+icon+")")
+                xbmc.executebuiltin("XBMC.Notification(Pancas,We failed to reach a server. - "+str(e.reason)+",10000,"+icon+")")
 
 def getSources():
         try:
@@ -211,7 +208,7 @@ def addSource(url=None):
             b.close()
         addon.setSetting('new_url_source', "")
         addon.setSetting('new_file_source', "")
-        xbmc.executebuiltin("XBMC.Notification(pancas,New source added.,5000,"+icon+")")
+        xbmc.executebuiltin("XBMC.Notification(Pancas,New source added.,5000,"+icon+")")
         if not url is None:
             if 'xbmcplus.xb.funpic.de' in url:
                 xbmc.executebuiltin("XBMC.Container.Update(%s?mode=14,replace)" %sys.argv[0])
@@ -507,7 +504,7 @@ def getItems(items,fanart):
                 applyblock = item('parentalblock')[0].string
             except:
                 addon_log('parentalblock Error')
-                name = ''
+                applyblock = ''
             if applyblock=='true' and parentalblock: continue
                 
             try:
@@ -1541,7 +1538,10 @@ def unpack(sJavascript,iteration=1, totaliterations=2  ):
         #aa=1/0
     else:
 
-        aSplit = sJavascript.split("rn p}('")
+        if "rn p}('" in sJavascript:
+            aSplit = sJavascript.split("rn p}('")
+        else:
+            aSplit = sJavascript.split("rn A}('")
         print aSplit
 
         p1,a1,c1,k1=('','0','0','')
@@ -2033,7 +2033,7 @@ def urlsolver(url):
         else:
             resolver = resolved
     else:
-        xbmc.executebuiltin("XBMC.Notification(pancas,Urlresolver donot support this domain. - ,5000)")
+        xbmc.executebuiltin("XBMC.Notification(Pancas,Urlresolver donot support this domain. - ,5000)")
     return resolver
 def play_playlist(name, mu_playlist,queueVideo=None):
         playlist = xbmc.PlayList(xbmc.PLAYLIST_VIDEO)
@@ -2096,13 +2096,12 @@ def play_playlist(name, mu_playlist,queueVideo=None):
 
 def download_file(name, url):
         if addon.getSetting('save_location') == "":
-			#addSource(os.path.join(addon.getSetting('save_location'), name))
-            xbmc.executebuiltin("XBMC.Notification('pancas','Choose a location to save files.',15000,"+icon+")")
+            xbmc.executebuiltin("XBMC.Notification('Pancas','Choose a location to save files.',15000,"+icon+")")
             addon.openSettings()
         params = {'url': url, 'download_path': addon.getSetting('save_location')}
         downloader.download(name, params)
         dialog = xbmcgui.Dialog()
-        ret = dialog.yesno('pancas', 'Do you want to add this file as a source?')
+        ret = dialog.yesno('Pancas', 'Do you want to add this file as a source?')
         if ret:
             addSource(os.path.join(addon.getSetting('save_location'), name))
 
@@ -2150,7 +2149,7 @@ def addDir(name,url,mode,iconimage,fanart,description,genre,date,credits,showcon
             parentalblock =addon.getSetting('parentalblocked')
             parentalblock= parentalblock=="true"
             parentalblockedpin =addon.getSetting('parentalblockedpin')
-            print 'parentalblockedpin',parentalblockedpin
+#            print 'parentalblockedpin',parentalblockedpin
             if len(parentalblockedpin)>0:
                 if parentalblock:
                     contextMenu.append(('Disable Parental Block','XBMC.RunPlugin(%s?mode=55&name=%s)' %(sys.argv[0], urllib.quote_plus(name))))
@@ -2167,7 +2166,7 @@ def addDir(name,url,mode,iconimage,fanart,description,genre,date,credits,showcon
                 contextMenu.append(('Download','XBMC.RunPlugin(%s?url=%s&mode=9&name=%s)'
                                     %(sys.argv[0], urllib.quote_plus(url), urllib.quote_plus(name))))
             elif showcontext == 'fav':
-                contextMenu.append(('Remove from pancas Favorites','XBMC.RunPlugin(%s?mode=6&name=%s)'
+                contextMenu.append(('Remove from Pancas Favorites','XBMC.RunPlugin(%s?mode=6&name=%s)'
                                     %(sys.argv[0], urllib.quote_plus(name))))
             if showcontext == '!!update':
                 fav_params2 = (
@@ -2176,7 +2175,7 @@ def addDir(name,url,mode,iconimage,fanart,description,genre,date,credits,showcon
                     )
                 contextMenu.append(('[COLOR yellow]!!update[/COLOR]','XBMC.RunPlugin(%s)' %fav_params2))
             if not name in FAV:
-                contextMenu.append(('Add to pancas Favorites','XBMC.RunPlugin(%s?mode=5&name=%s&url=%s&iconimage=%s&fanart=%s&fav_mode=%s)'
+                contextMenu.append(('Add to Pancas Favorites','XBMC.RunPlugin(%s?mode=5&name=%s&url=%s&iconimage=%s&fanart=%s&fav_mode=%s)'
                          %(sys.argv[0], urllib.quote_plus(name), urllib.quote_plus(url), urllib.quote_plus(iconimage), urllib.quote_plus(fanart), mode)))
             liz.addContextMenuItems(contextMenu)
         ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
@@ -2269,7 +2268,7 @@ def addLink(url,name,iconimage,fanart,description,genre,date,showcontext,playlis
         parentalblock =addon.getSetting('parentalblocked')
         parentalblock= parentalblock=="true"
         parentalblockedpin =addon.getSetting('parentalblockedpin')
-        print 'parentalblockedpin',parentalblockedpin
+#        print 'parentalblockedpin',parentalblockedpin
         if len(parentalblockedpin)>0:
             if parentalblock:
                 contextMenu.append(('Disable Parental Block','XBMC.RunPlugin(%s?mode=55&name=%s)' %(sys.argv[0], urllib.quote_plus(name))))
@@ -2356,7 +2355,7 @@ def addLink(url,name,iconimage,fanart,description,genre,date,showcontext,playlis
             #contextMenu = []
             if showcontext == 'fav':
                 contextMenu.append(
-                    ('Remove from pancas Favorites','XBMC.RunPlugin(%s?mode=6&name=%s)'
+                    ('Remove from Pancas Favorites','XBMC.RunPlugin(%s?mode=6&name=%s)'
                      %(sys.argv[0], urllib.quote_plus(name)))
                      )
             elif not name in FAV:
@@ -2368,7 +2367,7 @@ def addLink(url,name,iconimage,fanart,description,genre,date,showcontext,playlis
                     fav_params += 'playlist='+urllib.quote_plus(str(playlist).replace(',','||'))
                 if regexs:
                     fav_params += "&regexs="+regexs
-                contextMenu.append(('Add to pancas Favorites','XBMC.RunPlugin(%s)' %fav_params))
+                contextMenu.append(('Add to Pancas Favorites','XBMC.RunPlugin(%s)' %fav_params))
             liz.addContextMenuItems(contextMenu)
         if not playlist is None:
             if addon.getSetting('add_playlist') == "false":
@@ -2640,37 +2639,39 @@ elif mode==17:
         import copy
         ln=''
         for obj in ret:
-            newcopy=copy.deepcopy(regexs)
-#            print 'newcopy',newcopy, len(newcopy)
-            listrepeatT=listrepeat
-            i=0
-            for i in range(len(obj)):
-#                print 'i is ',i, len(obj), len(newcopy)
+            try:
+                newcopy=copy.deepcopy(regexs)
+    #            print 'newcopy',newcopy, len(newcopy)
+                listrepeatT=listrepeat
+                i=0
+                for i in range(len(obj)):
+    #                print 'i is ',i, len(obj), len(newcopy)
+                    if len(newcopy)>0:
+                        for the_keyO, the_valueO in newcopy.iteritems():
+                            if the_valueO is not None:
+                                for the_key, the_value in the_valueO.iteritems():
+                                    if the_value is not None:                                
+        #                                print  'key and val',the_key, the_value
+        #                                print 'aa'
+        #                                print '[' + regexname+'.param'+str(i+1) + ']'
+        #                                print repr(obj[i])
+                                        if type(the_value) is dict:
+                                            for the_keyl, the_valuel in the_value.iteritems():
+                                                if the_valuel is not None:
+                                                    the_value[the_keyl]=the_valuel.replace('[' + regexname+'.param'+str(i+1) + ']', obj[i].decode('utf-8') )                                            
+                                        else:
+                                            the_valueO[the_key]=the_value.replace('[' + regexname+'.param'+str(i+1) + ']', obj[i].decode('utf-8') )
+                    listrepeatT=listrepeatT.replace('[' + regexname+'.param'+str(i+1) + ']',obj[i].decode('utf-8')) 
+                #newcopy = urllib.quote(repr(newcopy))
+    #            print 'new regex list', repr(newcopy), repr(listrepeatT)
+    #            addLink(listlinkT,listtitleT.encode('utf-8', 'ignore'),listthumbnailT,'','','','',True,None,newcopy, len(ret))
+                regex_xml=''
                 if len(newcopy)>0:
-                    for the_keyO, the_valueO in newcopy.iteritems():
-                        if the_valueO is not None:
-                            for the_key, the_value in the_valueO.iteritems():
-                                if the_value is not None:                                
-    #                                print  'key and val',the_key, the_value
-    #                                print 'aa'
-    #                                print '[' + regexname+'.param'+str(i+1) + ']'
-    #                                print repr(obj[i])
-                                    if type(the_value) is dict:
-                                        for the_keyl, the_valuel in the_value.iteritems():
-                                            if the_valuel is not None:
-                                                the_value[the_keyl]=the_valuel.replace('[' + regexname+'.param'+str(i+1) + ']', obj[i].decode('utf-8') )                                            
-                                    else:
-                                        the_valueO[the_key]=the_value.replace('[' + regexname+'.param'+str(i+1) + ']', obj[i].decode('utf-8') )
-                listrepeatT=listrepeatT.replace('[' + regexname+'.param'+str(i+1) + ']',obj[i].decode('utf-8')) 
-            #newcopy = urllib.quote(repr(newcopy))
-#            print 'new regex list', repr(newcopy), repr(listrepeatT)
-#            addLink(listlinkT,listtitleT.encode('utf-8', 'ignore'),listthumbnailT,'','','','',True,None,newcopy, len(ret))
-            regex_xml=''
-            if len(newcopy)>0:
-                regex_xml=d2x(newcopy,'lsproroot')
-                regex_xml=regex_xml.split('<lsproroot>')[1].split('</lsproroot')[0]
-          
-            ln+='\n<item>%s\n%s</item>'%(listrepeatT,regex_xml)   
+                    regex_xml=d2x(newcopy,'lsproroot')
+                    regex_xml=regex_xml.split('<lsproroot>')[1].split('</lsproroot')[0]
+              
+                ln+='\n<item>%s\n%s</item>'%(listrepeatT,regex_xml)   
+            except: traceback.print_exc(file=sys.stdout)
 #            print repr(ln)
 #            print newcopy
                 
@@ -2689,13 +2690,13 @@ elif mode==17:
             else:
                 playsetresolved(url,name,iconimage,setresolved)
         else:
-            xbmc.executebuiltin("XBMC.Notification(pancas,Failed to extract regex. - "+"this"+",4000,"+icon+")")
+            xbmc.executebuiltin("XBMC.Notification(Pancas,Failed to extract regex. - "+"this"+",4000,"+icon+")")
 elif mode==18:
     addon_log("youtubedl")
     try:
         import youtubedl
     except Exception:
-        xbmc.executebuiltin("XBMC.Notification(pancas,Please [COLOR yellow]install Youtube-dl[/COLOR] module ,10000,"")")
+        xbmc.executebuiltin("XBMC.Notification(Pancas,Please [COLOR yellow]install Youtube-dl[/COLOR] module ,10000,"")")
     stream_url=youtubedl.single_YD(url)
     playsetresolved(stream_url,name,iconimage)
 elif mode==19:
@@ -2724,14 +2725,14 @@ elif mode==55:
         newStr = keyboard.getText()
         if newStr==parentalblockedpin:
             addon.setSetting('parentalblocked', "false")
-            xbmc.executebuiltin("XBMC.Notification(pancas,Parental Block Disabled,5000,"+icon+")")
+            xbmc.executebuiltin("XBMC.Notification(Pancas,Parental Block Disabled,5000,"+icon+")")
         else:
-            xbmc.executebuiltin("XBMC.Notification(pancas,Wrong Pin??,5000,"+icon+")")
+            xbmc.executebuiltin("XBMC.Notification(Pancas,Wrong Pin??,5000,"+icon+")")
     xbmcplugin.endOfDirectory(int(sys.argv[1]))
 elif mode==56:
     addon_log("disable lock")
     addon.setSetting('parentalblocked', "true")
-    xbmc.executebuiltin("XBMC.Notification(pancas,Parental block enabled,5000,"+icon+")")
+    xbmc.executebuiltin("XBMC.Notification(Pancas,Parental block enabled,5000,"+icon+")")
     xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 elif mode==53:
