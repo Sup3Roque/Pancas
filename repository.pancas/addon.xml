@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.pancas" name="Pancas Addon Repository" version="1.0" provider-name="Mario">
-	<extension point="xbmc.addon.repository" name="Mario Addon Repository">
-    <dir>
-            <info compressed="false">https://raw.github.com/Sup3roque/pancas/master/addons.xml</info>
-            <checksum>https://raw.github.com/Sup3roque/pancas/master/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.github.com/Sup3roque/pancas/master/zips</datadir>
-    </dir>
-    
-    <info compressed="false">https://offshoregit.com/Sup3roque/pancas/main/addons.xml</info>
-    <checksum>https://offshoregit.com/Sup3roque/pancas/main/addons.xml.md5</checksum>
-    <datadir zip="true">https://offshoregit.com/Sup3roque/pancas/main/zips</datadir>
-
+<addon id="repository.pancas" name="Pancas" version="1.0" provider-name="Mario">
+	<extension point="xbmc.addon.repository" name="Pancas">
+		<info compressed="false">http://github.com/Sup3Roque/Pancas/raw/master/addons.xml</info>
+		<checksum>http://github.com/Sup3Roque/Pancas/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://github.com/Sup3Roque/Pancas/raw/master/zips</datadir>
 	</extension>
-
+	<extension point="xbmc.addon.metadata">
+		<summary>Install MY Addons</summary>
+		<description>Download and install addons from Mario</description>
+		<platform>all</platform>
+	</extension>
 </addon>
+
