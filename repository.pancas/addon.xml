@@ -6,8 +6,8 @@
 		<datadir zip="true">http://github.com/Sup3Roque/Pancas/raw/master/zips</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary>Install MY Addons</summary>
-		<description>Download and install addons from Mario</description>
+		<summary>Pancadas TV</summary>
+		<description>Televisao Portuguesa e não só</description>
 		<platform>all</platform>
 	</extension>
 </addon>

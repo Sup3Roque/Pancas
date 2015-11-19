@@ -63,8 +63,10 @@ else: FAV = []
 if os.path.exists(source_file)==True:
     SOURCES = open(source_file).read()
 else: addSource("http://pastebin.com/raw.php?i=z8Eb9YcL")
-	  SOURCES = open(source_file).read()
-
+	  #SOURCES = open(source_file).read()
+if os.path.exists(source_file)==True:
+    SOURCES = open(source_file).read()
+else: SOURCES = []
 
 def addon_log(string):
     if debug == 'true':
