@@ -1,2 +1,0 @@
-# Pancas
-Here Pancadas TV
