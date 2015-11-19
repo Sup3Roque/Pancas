@@ -1,4 +1,3 @@
-XBMC Plugins 
-=====
-
-Place for my plugin developments. 
+Pancadas TV
+-----------
+Uma televisão para todos
