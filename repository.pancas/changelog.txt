@@ -1,2 +1,2 @@
 [B]Version 1.0[/B]
-- First version 1
+- Initial version

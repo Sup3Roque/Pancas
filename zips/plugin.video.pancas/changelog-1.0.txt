@@ -1,4 +1,2 @@
-Version 1.0.0
-Cloned from livestrepro and added all my changes
-
-
+v1.0
+Initial Release
