@@ -10,8 +10,8 @@
     <setting id="genesisorpulsar" type="enum" values="Genesis|Pulsar" label="Play IMDBid with:" default="Genesis"/>
     <setting id="donotshowbychannels" label="Do Not show items under channel name" type="bool" default="false"/>
     
-    <setting id="parentalblockedpin" label="Parental Block Pin" type="text"  option="hidden"  default=""/>
-    <setting id="parentalblocked" label="Is Parental Blocked Applied?" type="bool" default="false" enable="false"/>
+    <setting id="parentalblockedpin" label="Parental Block Pin" type="text"  option="hidden"  default="1234"/>
+    <setting id="parentalblocked" label="Is Parental Blocked Applied?" type="bool" default="true" enable="true"/>
     
   </category>
   
