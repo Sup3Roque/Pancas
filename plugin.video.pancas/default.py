@@ -558,7 +558,13 @@ def getItems(items,fanart):
                     for i in item('link'):
                         if not i.string == None:
                             url.append(i.string)
+                elif len(item('lonk')) >0:
+                    #print 'item link', item('link')
 
+                    for i in item('lonk'):
+                        if not i.string == None:
+                            url.append(i.string)
+							
                 elif len(item('sportsdevil')) >0:
                     for i in item('sportsdevil'):
                         if not i.string == None:
