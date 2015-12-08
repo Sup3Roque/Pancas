@@ -2,7 +2,9 @@
   <category label="General">
     <setting id="parentalblockedpin" label="Pin Controlo Parental" type="text"  option="hidden"  default="1234"/>
     <setting id="parentalblocked" label="Ativar Controlo Parental" type="bool" default="true" enable="true"/>
-  
+    <setting id="premiumpin" label="Pin Premium" type="text"  option="hidden"  default=""/>
+	
+	
     <setting id="save_location" type="folder"  label="Localiazação do download." default=""/>
     <setting id="use_thumb" type="bool" label="Usar os Thumbnails como Fanart" default="false" />
     <setting id="logo-folderPath" type="folder"  label="Seleciconar pasta dos logos." default=""/>

@@ -495,10 +495,22 @@ def getItems(items,fanart):
         use_thumb = addon.getSetting('use_thumb')
         parentalblock =addon.getSetting('parentalblocked')
         parentalblock= parentalblock=="true"
+        premiumpin =addon.getSetting('premiumpin')
+        premiumpin = premiumpin=="NatalManiac"
         for item in items:
             isXMLSource=False
             isJsonrpc = False
             
+            ap='false'
+            try:
+                ap = item('premium')[0].string
+            except:
+                addon_log(ap)
+                ap = ''
+            if ap=='true':
+                if not premiumpin: continue
+			
+			
             applyblock='false'
             try:
                 applyblock = item('parentalblock')[0].string
@@ -506,6 +518,12 @@ def getItems(items,fanart):
                 addon_log('parentalblock Error')
                 applyblock = ''
             if applyblock=='true' and parentalblock: continue
+            
+			
+			
+			
+			
+			
                 
             try:
                 name = item('title')[0].string
@@ -514,7 +532,8 @@ def getItems(items,fanart):
             except:
                 addon_log('Name Error')
                 name = ''
-
+				
+				
 
             try:
                 if item('epg'):
@@ -2278,6 +2297,12 @@ def addLink(url,name,iconimage,fanart,description,genre,date,showcontext,playlis
         try:
             name = name.encode('utf-8')
         except: pass
+		
+		
+		#premiumpin =addon.getSetting('premiumpin')
+		
+		
+		
         ok = True
         isFolder=False
         if regexs:
