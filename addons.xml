@@ -33,7 +33,7 @@ Esta lista 80% são links acestream, por isso tem de ter o plexus instalado e a 
 
 <addon id="plugin.video.pancaspremium"
        name="Pancas Premium"
-       version="1.0.0"
+       version="1.0.1"
        provider-name="Maniac Team">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
