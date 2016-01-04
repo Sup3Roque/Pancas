@@ -3,13 +3,13 @@
      <setting id="site" type="text" label="Website" default=""/>
      <setting id="usern" type="text" label="Username" default=""/>
      <setting id="passw" type="text" label="Password" default=""/>
-     <setting id="port" type="text" label="Porta" default="80"/>
-	 <setting id="type" type="select" label="Tipo" values="m3u8|ts|" default="ts"/>
-	 <setting id="active" type="bool" label="Ativar" value="false"/>
+     <setting id="port" type="text" label="Port" default="80"/>
+	 <setting id="type" type="select" label="Type" values="m3u8|ts|" default="ts"/>
+	 <setting id="active" type="bool" value="false"/>
 </category>
 <category label="EPG">
-    <setting label="EPG Source" type="select" id="source" values="Downloaded|Local|" default="Local"/>
-    <setting label="EPG Download Localização" type="file" id="file" value="path_to_files"/>
+    <setting label="EPG Source" type="select" id="source" values="Downloaded|From myinfadroid|" default="From myinfadroid"/>
+    <setting label="EPG Download Location" type="file" id="file" value="path_to_files"/>
 </category>
 
 

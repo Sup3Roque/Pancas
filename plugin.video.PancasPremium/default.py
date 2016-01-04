@@ -16,9 +16,9 @@ source=xbmcplugin.getSetting(int(sys.argv[1]), 'source')
 # V-- This Is For Web Login Successful Hide The Login Button 
 source2 = ('http://infadroid.tk/epg/guia.xml')
 '''                          V----The Addon Name----V'''
-ADDON = xbmcaddon.Addon(id='plugin.video.PancasPremium')
+ADDON = xbmcaddon.Addon(id='plugin.video.pancaspremium')
 '''        V----The Addon Name----V'''
-AddonID = 'plugin.video.PancasPremium'
+AddonID = 'plugin.video.pancaspremium'
 Addon = xbmcaddon.Addon(AddonID)
 addonDir = Addon.getAddonInfo('path').decode("utf-8")
 #Created By Pipcan.
@@ -28,14 +28,14 @@ time= datetime.datetime.today().strftime('%H%M%S')
 def CATEGORIES():
 #       V-----------------V This is a function that when a user logges in to reveal bellow directorys
         if active =="true":
-            addDir('[COLOR yellow]Conectado como:[/COLOR]  %s'%(usern),'%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),6	,'')
-            addDir('Minha Conta','%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),6,'')
-            addDir('Canais','%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),5,'')
+            addDir('[COLOR yellow]LOGGED IN AS:[/COLOR]  %s'%(usern),'%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),6	,'')
+            addDir('My Account','%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),6,'')
+            addDir('Live','%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),5,'')
             addDir('Video On-Demand','%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),4,'')
-            addDir2('Definições','settings',7,'')
+            addDir2('Settings','settings',7,'')
 #       V---V If User Not Logged In Show Login Button
         else:
-            addDir('Click para entrar','%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),3,'')
+            addDir('Click To Login','%s:%s/panel_api.php?username=%s&password=%s'%(site,port,usern,passw),3,'')
 
 def OPEN_URL(url):
         req = urllib2.Request(url)
@@ -87,27 +87,27 @@ def ACCOUNT(url):
         match5=re.compile('"max_connections":"(.+?)"').findall(link)
         match6=re.compile('"allowed_output_formats":(.+?)}').findall(link)
         for url in match:
-                addDir2('[COLOR green]Informação da Conta[/COLOR]','','','')
+                addDir2('[COLOR green]ACCOUNT INFOMATION[/COLOR]','','','')
                 addDir2('[COLOR yellow]Username:                       [/COLOR][I]%s[/I]'%(url),'','','')
         for url in match1:
-                addDir2('[COLOR yellow]Estado:                            [/COLOR][I]%s[/I]'%(url),'','','')
+                addDir2('[COLOR yellow]Status:                            [/COLOR][I]%s[/I]'%(url),'','','')
         for url in match4:
-                addDir2('[COLOR yellow]Criado:                        [/COLOR][I]%s[/I]'%(url),'','','')
+                addDir2('[COLOR yellow]Created:                        [/COLOR][I]%s[/I]'%(url),'','','')
         for url in match2:
-                addDir2('[COLOR yellow]Expira:                         [/COLOR][I]%s[/I]'%(url),'','','')
+                addDir2('[COLOR yellow]Expires:                         [/COLOR][I]%s[/I]'%(url),'','','')
         for url in match3:
-                addDir2('[COLOR yellow]Conexão ativa:          [/COLOR][I]%s[/I]'%(url),'','','')
+                addDir2('[COLOR yellow]Active Connection:          [/COLOR][I]%s[/I]'%(url),'','','')
         for url in match5:
-                addDir2('[COLOR yellow]Conexão Máxima:           [/COLOR][I]%s[/I]'%(url),'','','')
+                addDir2('[COLOR yellow]Max Connection:           [/COLOR][I]%s[/I]'%(url),'','','')
         for url in match6:
-                addDir2('[COLOR yellow]Formatos disponíveis:          [/COLOR][I]%s[/I]'%(url),'','','')
+                addDir2('[COLOR yellow]Avalible Formats:          [/COLOR][I]%s[/I]'%(url),'','','')
 # This Funtion Is For Opening The Settings Panel
 def openSettings():
     ADDON.openSettings()
 
 def DownloaderClass(url,dest):
     dp = xbmcgui.DialogProgress()
-    dp.create("Adquirir EPG","Downloading")
+    dp.create("Getting EPG","Downloading")
     urllib.urlretrieve(url,dest,lambda nb, bs, fs, url=url: _pbhook(nb,bs,fs,url,dp))
 def _pbhook(numblocks, blocksize, filesize, url=None,dp=None):
     try:
@@ -118,11 +118,11 @@ def _pbhook(numblocks, blocksize, filesize, url=None,dp=None):
         percent = 100
         dp.update(percent)
     if dp.iscanceled(): 
-        print "DOWNLOAD CANCELADO" # need to get this part working
+        print "DOWNLOAD CANCELLED" # need to get this part working
         dp.close()
 def GRABEPG(url):
     dialog = xbmcgui.Dialog()
-    if dialog.yesno("Download EPG", 'Quer fazer Download do EPG','', "",'Fechar','Sim'):
+    if dialog.yesno("Download EPG", 'Do you Wish To Download EPG','', "",'Close','Yes'):
         dp = xbmcgui.DialogProgress()
         dp.create('Downloading EPG')
         url = ("%s"%(source2))
@@ -131,7 +131,7 @@ def GRABEPG(url):
         xbmc.executebuiltin("UpdateLocalAddons")
         xbmc.executebuiltin("UpdateAddonRepos")
         dp.close()
-        dialog.ok("Feito", " Update está Completo")
+        dialog.ok("All Done", " Update Is Complete")
     else:
         return	
 def VIDEOLINKS(url,name):
@@ -146,7 +146,7 @@ def VIDEOLINKS(url,name):
         
 def SIGNIN():
     dialog = xbmcgui.Dialog()
-    if dialog.yesno("Prepare a sua info de acesso", 'Deseja fazer login','', "",'Cancelar','Entrar'):
+    if dialog.yesno("Get Your Login Info Ready", 'Do you Wish To Sign In','', "",'Cancel','Sign In'):
         email=Search('username')
         ADDON.setSetting('usern',email)
         xbmc.executebuiltin('Container.Refresh')
@@ -155,11 +155,11 @@ def SIGNIN():
         xbmc.executebuiltin('Container.Refresh')
         login=urllib.urlopen('%s:%s/panel_api.php?username=%s&password=%s'%(site,port,email,password)).read()
         if login == '{"user_info":{"auth":0}}':
-            dialog.ok("Erro!", "Acesso incorreto!")
+            dialog.ok("Error!", "Details Were Incorrect!")
             return
         else:
             xbmc.executebuiltin('Container.Refresh')
-            dialog.ok("Sucesso!", " Obrigado %s  Bem vindo!"%(usern))
+            dialog.ok("Success!", " Thank You %s  Enjoy!"%(usern))
             ADDON.setSetting('active','True')
 
             return

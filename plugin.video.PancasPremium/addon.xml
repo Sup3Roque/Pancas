@@ -1,8 +1,8 @@
-<?xml version="1.0.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.PancasPremium"
-       name="PancasPremium"
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.pancaspremium"
+       name="Pancas Premium"
        version="1.0.0"
-       provider-name="ManiacTeam">
+       provider-name="Maniac Team">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -11,7 +11,7 @@
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">Watch Pancas TV channels</summary>
+    <summary lang="en">Veja Pancas TV Premium criado para si e a pensar em si</summary>
     <language>en</language>
     <description lang="en"></description>
      <platform>all</platform>
