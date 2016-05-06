@@ -2,7 +2,7 @@
   <category label="General">
     <setting id="parentalblockedpin" label="Pin Controlo Parental" type="text"  option="hidden"  default="1234"/>
     <setting id="parentalblocked" label="Ativar Controlo Parental" type="bool" default="true" enable="true"/>
-    <setting id="premiumpin" label="Pin Premium" type="text"  option="hidden"  default=""/>
+    
 	
 	
     <setting id="save_location" type="folder"  label="Localiazação do download." default=""/>
@@ -14,7 +14,7 @@
     <setting id="1080pquality" label="Play 1080p video ON demand if available (Not live)" type="bool" default=""/>
     <setting id="genesisorpulsar" type="enum" values="Genesis|Pulsar" label="Play IMDBid with:" default="Genesis"/>
     <setting id="donotshowbychannels" label="Não mostrar os items por baixo do nome" type="bool" default="false"/>
-    
+    <setting id="premiumpin" label="Enabled" type="text"  option="hidden"  default=""/>
     
     
   </category>

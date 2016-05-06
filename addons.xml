@@ -2,8 +2,8 @@
 <addons>
 <addon id="plugin.video.pancas"
        name="Pancas"
-       version="1.0.5"
-       provider-name="Mario">
+       version="1.0.6"
+       provider-name="Pancas">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.beautifulsoup" version="3.2.1"/>
@@ -31,7 +31,7 @@ Maniac Team / Pancas TV
   </extension>
 </addon>
 
-<addon id="repository.pancas" name="Pancas repository" version="1.0.2" provider-name="Mario">
+<addon id="repository.pancas" name="Pancas repository" version="1.0.3" provider-name="Pancas">
 	<extension point="xbmc.addon.repository" name="Pancas Add-on Repository">
 		<info compressed="false">http://raw.github.com/Sup3Roque/Pancas/master/addons.xml</info>
 		<checksum>http://raw.github.com/Sup3Roque/Pancas/master/addons.xml.md5</checksum>

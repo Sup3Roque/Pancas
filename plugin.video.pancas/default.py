@@ -496,7 +496,7 @@ def getItems(items,fanart):
         parentalblock =addon.getSetting('parentalblocked')
         parentalblock= parentalblock=="true"
         premiumpin =addon.getSetting('premiumpin')
-        premiumpin = premiumpin=="NatalManiac"
+        premiumpin = premiumpin=="Ajustar"
         for item in items:
             isXMLSource=False
             isJsonrpc = False
