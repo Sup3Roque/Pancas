@@ -2,7 +2,7 @@
 <addons>
 <addon id="plugin.video.pancas"
        name="Pancas"
-       version="1.0.6"
+       version="1.0.7"
        provider-name="Pancas">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -23,7 +23,7 @@
     <summary>Pancadas TV</summary>
     <description>
         Lista de canais portugueses e europeus com desporto, noticias, música e rádios portugueses.
-Maniac Team / Pancas TV
+        Pancas TV
 
 
     </description>
