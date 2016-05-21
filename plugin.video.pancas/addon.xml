@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.pancas"
-       name="Pancas"
-       version="1.0.7"
+       name="PancasTV"
+       version="1.0.8"
        provider-name="Pancas">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -11,19 +11,18 @@
     <import addon="script.module.requests" />
     <import addon="script.module.httplib2" />
     <import addon="script.module.youtube.dl" optional="true"/>
-    <import addon="plugin.video.youtube" />
+    <import addon="plugin.video.youtube" optional="true" />
     <import addon="script.module.urlresolver" optional="true"/>
     <import addon="script.module.simplejson" />    
+     <import addon="script.module.livestreamer" optional="true"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>Pancadas TV</summary>
+    <summary>TV para todos</summary>
     <description>
-        Lista de canais portugueses e europeus com desporto, noticias, música e rádios portugueses.
-        Pancas TV
-
+        Uma televisão ao clique de um dedo.
         
     </description>
     <platform>all</platform>
