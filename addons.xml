@@ -2,7 +2,7 @@
 <addons>
 <addon id="plugin.video.pancas"
        name="PancasTV"
-       version="1.0.10"
+       version="1.1.0"
        provider-name="Pancas">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
