@@ -26,7 +26,7 @@ from resources.lib.libraries import client
 from resources.lib.libraries import control
 
 tsdownloader=False
-resolve_url=['180upload.com', 'allmyvideos.net', 'bestreams.net', 'clicknupload.com', 'cloudzilla.to', 'movshare.net', 'novamov.com', 'nowvideo.sx', 'videoweed.es', 'daclips.in', 'datemule.com', 'fastvideo.in', 'faststream.in', 'filehoot.com', 'filenuke.com', 'sharesix.com',  'plus.google.com', 'picasaweb.google.com', 'gorillavid.com', 'gorillavid.in', 'grifthost.com', 'hugefiles.net', 'ipithos.to', 'ishared.eu', 'kingfiles.net', 'mail.ru', 'my.mail.ru', 'videoapi.my.mail.ru', 'mightyupload.com', 'mooshare.biz', 'movdivx.com', 'movpod.net', 'movpod.in', 'movreel.com', 'mrfile.me', 'nosvideo.com', 'openload.co', 'played.to', 'bitshare.com', 'filefactory.com', 'k2s.cc', 'oboom.com', 'rapidgator.net', 'uploaded.net', 'primeshare.tv', 'bitshare.com', 'filefactory.com', 'k2s.cc', 'oboom.com', 'rapidgator.net', 'uploaded.net', 'sharerepo.com', 'stagevu.com', 'streamcloud.eu', 'streamin.to', 'thefile.me', 'thevideo.me', 'tusfiles.net', 'uploadc.com', 'zalaa.com', 'uploadrocket.net', 'uptobox.com', 'v-vids.com', 'veehd.com', 'vidbull.com', 'videomega.tv', 'vidplay.net', 'vidspot.net', 'vidto.me', 'vidzi.tv', 'vimeo.com', 'vk.com', 'vodlocker.com', 'xfileload.com', 'xvidstage.com', 'zettahost.tv']
+resolve_url=['180upload.com', 'allmyvideos.net', 'embedupload.com' 'bestreams.net', 'clicknupload.com', 'cloudzilla.to', 'movshare.net', 'novamov.com', 'nowvideo.sx', 'videoweed.es', 'daclips.in', 'datemule.com', 'fastvideo.in', 'faststream.in', 'filehoot.com', 'filenuke.com', 'sharesix.com',  'plus.google.com', 'picasaweb.google.com', 'gorillavid.com', 'gorillavid.in', 'grifthost.com', 'hugefiles.net', 'ipithos.to', 'ishared.eu', 'kingfiles.net', 'mail.ru', 'my.mail.ru', 'videoapi.my.mail.ru', 'mightyupload.com', 'mooshare.biz', 'movdivx.com', 'movpod.net', 'movpod.in', 'movreel.com', 'mrfile.me', 'nosvideo.com', 'openload.co', 'played.to', 'bitshare.com', 'filefactory.com', 'k2s.cc', 'oboom.com', 'rapidgator.net', 'uploaded.net', 'primeshare.tv', 'bitshare.com', 'filefactory.com', 'k2s.cc', 'oboom.com', 'rapidgator.net', 'uploaded.net', 'sharerepo.com', 'stagevu.com', 'streamcloud.eu', 'streamin.to', 'thefile.me', 'thevideo.me', 'tusfiles.net', 'uploadc.com', 'zalaa.com', 'uploadrocket.net', 'uptobox.com', 'v-vids.com', 'veehd.com', 'vidbull.com', 'videomega.tv', 'vidplay.net', 'vidspot.net', 'vidto.me', 'vidzi.tv', 'vimeo.com', 'vk.com', 'vodlocker.com', 'xfileload.com', 'xvidstage.com', 'zettahost.tv']
 g_ignoreSetResolved=['plugin.video.dramasonline','plugin.video.f4mTester','plugin.video.shahidmbcnet','plugin.video.SportsDevil','plugin.stream.vaughnlive.tv','plugin.video.ZemTV-shani']
 
 class NoRedirection(urllib2.HTTPErrorProcessor):
@@ -597,6 +597,40 @@ def parse_m3u(data):
             stream_url = 'plugin://plugin.video.f4mTester/?url='+urllib.quote_plus(stream_url)+'&amp;streamtype=TSDOWNLOADER&name='+urllib.quote(channel_name)
         addLink(stream_url, channel_name,thumbnail,'','','','','',None,'',total)
 
+        
+def imdb_id_from_title(title):
+    
+    """ return IMDB id for search string
+
+        Args::
+            title (str): the movie title search string
+
+        Returns: 
+            str. IMDB id, e.g., 'tt0095016' 
+            None. If no match was found
+
+    """
+    pattern = 'http://www.imdb.com/xml/find?json=1&nr=1&tt=on&q='+title
+    response = urllib2.urlopen(pattern)
+    html = response.read()
+    html2=json.loads(html)
+    tempor = html2["title_approx"][0]["id"]
+    if tempor == None:
+        raise
+    else:
+        return tempor
+        
+    #url = pattern.format(movie_title=urllib.quote(title))
+    #r = requests.get(url)
+    #res = r.json()
+    # sections in descending order or preference
+    #for section in ['popular','exact','substring']:
+    #    key = 'title_' + section 
+    #    if key in res:
+    #        return res[key][0]['id']        
+        
+        
+
 def getChannelItems(name,url,fanart):
         soup = getSoup(url)
         channel_list = soup.find('channel', attrs={'name' : name.decode('utf-8')})
@@ -609,6 +643,8 @@ def getChannelItems(name,url,fanart):
             fanArt = fanart
         for channel in channel_list('subchannel'):
             name = channel('name')[0].string
+            
+            
             try:
                 thumbnail = channel('thumbnail')[0].string
                 if thumbnail == None:
@@ -652,6 +688,91 @@ def getChannelItems(name,url,fanart):
                     raise
             except:
                 credits = ''
+                
+            try:
+                imdbID = channel('imdb')[0].string
+                if imdbID == None:
+                    
+                    
+                    #imdbID = imdb_id_from_title(name)
+                    #addon_log(name.encode('utf-8')+" - "+imdbID)
+                    #if imdbID == None:
+                    #    raise
+                    #else:
+                    #    response = urllib2.urlopen('http://api.themoviedb.org/3/find/'+imdbID+'?external_source=imdb_id&language=pt&api_key=3421e679385f33e2438463e286e5c918')
+                    #    html = response.read()
+                    #    html2=json.loads(html)
+                    #    tempor = html2["movie_results"][0]["overview"]
+                    #    if tempor == None:
+                    #        raise
+                    #    else:
+                    #        desc=tempor
+                    #"""
+                    raise
+                else:
+                    desc = desc.encode('utf-8')
+                    if (thumbnail=="" or fanArt=="" or desc.find("Nenhuma descrição")!=-1):
+                        #addon_log("treta")
+                    
+                        response = urllib2.urlopen('http://api.themoviedb.org/3/find/'+channel('imdb')[0].string+'?external_source=imdb_id&language=pt&api_key=3421e679385f33e2438463e286e5c918')
+                        html = response.read()
+                        html2=json.loads(html)
+                        tempor = html2["movie_results"][0]["overview"]
+                        
+                        #addon_log(html)
+                        #addon_log(tempor)
+                        if tempor == None:
+                            response = urllib2.urlopen('http://api.themoviedb.org/3/find/'+channel('imdb')[0].string+'?external_source=imdb_id&language=en&api_key=3421e679385f33e2438463e286e5c918')
+                            html = response.read()
+                            html2=json.loads(html)
+                            tempor = html2["movie_results"][0]["overview"]
+                            if tempor == None:
+                                raise
+                            else:
+                                desc=tempor
+                        else:
+                            desc=tempor
+
+                        tras = html2["movie_results"][0]["backdrop_path"]
+                        if tras == None:
+                            raise
+                        else:
+                            fanArt = 'http://image.tmdb.org/t/p/w500/'+tras
+                            
+                        poster = html2["movie_results"][0]["poster_path"]
+                        if poster == None:
+                            raise
+                        else:
+                            thumbnail = 'http://image.tmdb.org/t/p/w150/'+poster
+                        
+                        vote_average = html2["movie_results"][0]["vote_average"]
+                        if vote_average == None:
+                            raise
+                        else:
+                            vote_average = ''
+                        
+                    #try:
+                    
+                    #    response2 = urllib2.urlopen('http://api.themoviedb.org/3/movie/'+channel('imdb')[0].string+'/videos?api_key=3421e679385f33e2438463e286e5c918')
+                    #    html3 = response2.read()
+                        #addon_log (len(html3.encode('utf-8')))
+                    #    if len(html3.encode('utf-8')) < 40:
+                    #        addon_log("nada")
+                    #        continue
+                    #    else:
+                    #        html4=json.loads(html3)
+                    #        tempor2 = html4["results"][0]["key"]
+                    #        addon_log(tempor2.encode('utf-8'))
+                    #except:
+                    #    raise
+            except:
+                raise
+                #addon_log(name.encode('utf-8'))
+                    
+                    
+            #addon_log(desc.encode('utf-8'))        
+                    
+                    
 
             try:
                 addDir(name.encode('utf-8', 'ignore'),url.encode('utf-8'),3,thumbnail,fanArt,desc,genre,credits,date)
