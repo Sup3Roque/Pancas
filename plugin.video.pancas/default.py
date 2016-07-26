@@ -3227,7 +3227,7 @@ elif mode==19:
         playsetresolved (urlsolver(url),name,iconimage,True)        
     else:
         addon_log("Cena Openload")
-        playsetresolved (solve(url),name,iconimage,True)
+        playsetresolved (urlsolver(url),name,iconimage,True)
 
 
 elif mode==21:
