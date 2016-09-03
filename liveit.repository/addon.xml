@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="liveit.repository" name="Live!t TV repository" version="0.0.2" provider-name="rebolinho">
+	<extension point="xbmc.addon.repository" name="Live!t TV Add-on Repository">
+		<info compressed="false">http://raw.github.com/rebolinho/liveit.repository/master/addons.xml</info>
+		<checksum>http://raw.github.com/rebolinho/liveit.repository/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/rebolinho/liveit.repository/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Live!t TV</summary>
+		<description lang="en">Repositorio para todos os membros do grupo Live!t TV.</description>
+		<language>pt</language>
+		<disclaimer lang="en">Como desenvolvedores do addon, nada temos a haver com os links disponibilizados. 
+		Limitimo-nos a ler o seu conteudo disponibilizado e converter em addon.</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>

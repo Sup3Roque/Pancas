@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.megcgo" name="[COLOR white]MegC[/COLOR]go repository" version="1.0.3" provider-name="[B]MegC[/B]go">
+    <extension point="xbmc.addon.repository" name="[COLOR white]MegC[/COLOR]go repository">
+        <info compressed="false">http://megc.pe.hu/plugins/addons.xml</info>
+        <checksum>http://megc.pe.hu/plugins/addons.xml.md5</checksum>
+        <datadir zip="true">http://megc.pe.hu/plugins/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Home of [COLOR green]Info[/COLOR] [COLOR yellow]TV[/COLOR] [COLOR red]Pobres[/COLOR]</summary>
+        <description>Home of [COLOR green]Info[/COLOR] [COLOR yellow]TV[/COLOR] [COLOR red]Pobres[/COLOR] - Info Listas Tv dos Pobres</description>
+        <platform>all</platform>
+    </extension>
+</addon>

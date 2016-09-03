@@ -1,0 +1,11 @@
+[B]Version 1.0.3[/B] [2016-05-11]
+- Repository server change - [COLOR green]Info[/COLOR] [COLOR yellow]TV[/COLOR] [COLOR red]Pobres[/COLOR]
+
+[B]Version 0.0.3[/B] [2016-05-10]
+- Somes changes to properly install addons - [COLOR green]Info[/COLOR] [COLOR yellow]TV[/COLOR] [COLOR red]Pobres[/COLOR]
+
+[B]Version 0.0.2[/B] [2016-04-06]
+- Somes changes but only one repo - [COLOR green]Info[/COLOR] [COLOR yellow]TV[/COLOR] [COLOR red]Pobres[/COLOR]
+
+[B]Version 0.0.1[/B] [2016-04-01]
+- First version

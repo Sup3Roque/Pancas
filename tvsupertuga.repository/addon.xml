@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="tvsupertuga.repository" name="[COLOR cyan]TV[/COLOR]-[COLOR red]SUPERTUGA[/COLOR].[COLOR limegreen]REPOSITORY[/COLOR]" version="0.0.6" provider-name="TVsupertuga">
+	<extension point="xbmc.addon.repository" name="tvsupertuga Repository">
+		<info compressed="false">http://tvsupertuga.net16.net/zips/addons.xml</info>
+		<checksum>http://tvsupertuga.net16.net/zips/addons.xml.md5</checksum>
+		<datadir zip="true">http://tvsupertuga.net16.net/instal/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>tvsupertuga repository</summary>
+		<description></description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>

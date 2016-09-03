@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
+<addon id="discave.repo" name="DiscaveHB Repositorio" version="0.0.5" provider-name="Discave">
+	<extension point="xbmc.addon.repository" name="Discave Repositorio">
+		<info compressed="false">http://raw.github.com/discave/discave.repo/master/addons.xml</info>
+		<checksum>http://raw.github.com/discave/discave.repo/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/discave/discave.repo/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>DiscaveHB Repo</summary>
+		<description>DiscaveHB Repositorio</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="frenchdj.repository" name="frenchdj repository" version="0.0.1" provider-name="frenchdj">
+	<extension point="xbmc.addon.repository" name="frenchdj Add-on Repository">
+		<info compressed="false">http://raw.github.com/frenchdj/frenchdj.repository/master/addons.xml</info>
+		<checksum>http://raw.github.com/frenchdj/frenchdj.repository/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/frenchdj/frenchdj.repository/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>frenchdj Addon</summary>
+		<description>frenchdj addons repositorio</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="koditraquinas.repository" name="Koditraquinas Repository" version="0.0.1" provider-name="Kodi Traquinas">
+	<extension point="xbmc.addon.repository" name="Kodi Traquinas Addon Repository">
+		<info compressed="false">http://raw.github.com/koditraquinas/koditraquinas.repository/master/addons.xml</info>
+		<checksum>http://raw.github.com/koditraquinas/koditraquinas.repository/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/koditraquinas/koditraquinas.repository/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Koditraquinas Entertenimento</summary>
+		<description>koditraquinas repositorio</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="liveit.repository" name="Live!t TV repository" version="0.0.2" provider-name="rebolinho">
+	<extension point="xbmc.addon.repository" name="Live!t TV Add-on Repository">
+		<info compressed="false">http://raw.github.com/rebolinho/liveit.repository/master/addons.xml</info>
+		<checksum>http://raw.github.com/rebolinho/liveit.repository/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/rebolinho/liveit.repository/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Live!t TV</summary>
+		<description lang="en">Repositorio para todos os membros do grupo Live!t TV.</description>
+		<language>pt</language>
+		<disclaimer lang="en">Como desenvolvedores do addon, nada temos a haver com os links disponibilizados.
+		Limitimo-nos a ler o seu conteudo disponibilizado e converter em addon.</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
 <addon id="plugin.program.pancaswizard" name="Pancas Wizard" version="1.0.0" provider-name="http://tiny.cc/PancasFacebook">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -15,6 +73,34 @@
 		<description>Fork from PsychoWizard, thanks you guys!!!</description>
 		<disclaimer></disclaimer>
 	<platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.loganaddon" name="loganaddon TV" version="1.2" provider-name="Vitor Pereira e Pedro Selva">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.youtube.dl" optional="true"/>
+    <import addon="plugin.video.youtube" optional="true" />
+    <import addon="script.module.urlresolver" optional="true"/>
+    <import addon="script.module.simplejson" />
+     <import addon="script.module.livestreamer" optional="true"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>HmmOK tudo para si</summary>
+    <description>
+
+
+    </description>
+    <platform>all</platform>
   </extension>
 </addon>
 
@@ -48,7 +134,20 @@
   </extension>
 </addon>
 
-<addon id="repository.pancas" name="Pancas repository" version="1.0.5" provider-name="Pancas">
+<addon id="repository.megcgo" name="[COLOR white]MegC[/COLOR]go repository" version="1.0.3" provider-name="[B]MegC[/B]go">
+    <extension point="xbmc.addon.repository" name="[COLOR white]MegC[/COLOR]go repository">
+        <info compressed="false">http://megc.pe.hu/plugins/addons.xml</info>
+        <checksum>http://megc.pe.hu/plugins/addons.xml.md5</checksum>
+        <datadir zip="true">http://megc.pe.hu/plugins/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Home of [COLOR green]Info[/COLOR] [COLOR yellow]TV[/COLOR] [COLOR red]Pobres[/COLOR]</summary>
+        <description>Home of [COLOR green]Info[/COLOR] [COLOR yellow]TV[/COLOR] [COLOR red]Pobres[/COLOR] - Info Listas Tv dos Pobres</description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
+<addon id="repository.pancas" name="Pancas repository" version="1.0.6" provider-name="Pancas">
 	<extension point="xbmc.addon.repository" name="Pancas Add-on Repository">
 		<info compressed="false">http://raw.github.com/Sup3Roque/Pancas/master/addons.xml</info>
 		<checksum>http://raw.github.com/Sup3Roque/Pancas/master/addons.xml.md5</checksum>
@@ -57,6 +156,79 @@
 	<extension point="xbmc.addon.metadata">
 		<summary>Pancas Repo</summary>
 		<description>TV para todos sempre ao melhor preço</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.rato.tv"
+  version="1.0.0"
+  name="Rato-TV repository"
+  provider-name="Rato">
+  <extension point="xbmc.addon.repository"
+    name="repository with ratotv addons">
+    <info compressed="false">http://tralhas.xyz/kodi/addons.xml</info>
+    <checksum>http://tralhas.xyz/kodi/addons.xml.md5</checksum>
+    <datadir zip="true">http://tralhas.xyz/kodi/repo/</datadir>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Rato-TV repository</summary>
+    <description>
+    </description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="repository.sembilhete.tv" name="sembilhete.tv repository" version="0.0.1" provider-name="Sem Bilhete">
+	<extension point="xbmc.addon.repository" name="sembilhete.tv Repository">
+		<info compressed="false">https://sembilhete.tv/static/kodi/addons.xml</info>
+		<checksum>https://sembilhete.tv/static/kodi/addons.xml.md5</checksum>
+		<datadir zip="true">https://sembilhete.tv/static/kodi/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Sem Bilhete Addon</summary>
+		<description>Addon Description</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.SonsOfAnarchy" name="Sons Of Anarchy" version="1.0" provider-name="Sons Of Anarchy">
+	<extension point="xbmc.addon.repository" name="Sons Of Anarchy">
+		<info compressed="false">http://gaiabuilds.comli.com/zips/addons.xml</info>
+		<checksum>http://gaiabuilds.comli.com/zips/addons.xml.md5</checksum>
+		<datadir zip="true">http://gaiabuilds.comli.com/zips/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Sons Of Anarchy Repository</summary>
+		<description>Blood Makes You Related… But Loyalty Makes You Family</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="teamtuga4ever.repository" name="teamuga4ever" version="1.1a" provider-name="teamtuga4">
+	<extension point="xbmc.addon.repository" name="teamuga4ever repository">
+		<info compressed="false">http://raw.github.com/teamtuga4/teamtuga4ever.repository/master/addons.xml</info>
+		<checksum>http://raw.github.com/teamtuga4/teamtuga4ever.repository/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/teamtuga4/teamtuga4ever.repository/master/repo/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Equipe TeamTuga4ever</summary>
+		<description>teamtuga4ever Repository</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="tvsupertuga.repository" name="[COLOR cyan]TV[/COLOR]-[COLOR red]SUPERTUGA[/COLOR].[COLOR limegreen]REPOSITORY[/COLOR]" version="0.0.6" provider-name="TVsupertuga">
+	<extension point="xbmc.addon.repository" name="tvsupertuga Repository">
+		<info compressed="false">http://tvsupertuga.net16.net/zips/addons.xml</info>
+		<checksum>http://tvsupertuga.net16.net/zips/addons.xml.md5</checksum>
+		<datadir zip="true">http://tvsupertuga.net16.net/instal/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>tvsupertuga repository</summary>
+		<description></description>
 		<disclaimer></disclaimer>
 		<platform>all</platform>
 	</extension>
