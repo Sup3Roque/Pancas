@@ -47,9 +47,16 @@ class navigator:
         movie_library = os.path.join(control.transPath(control.setting('movie_library')),'')
         tv_library = os.path.join(control.transPath(control.setting('tv_library')),'')
         tv_downloads = os.path.join(control.transPath(control.setting('tv_downloads')),'')
-        #movie_downloads = os.path.join(control.transPath(control.setting('movie_downloads')),'')
-        if not os.path.exists(movie_library): os.makedirs(movie_library)
-        if not os.path.exists(tv_library): os.makedirs(tv_library)
+        movie_downloads = os.path.join(control.transPath(control.setting('movie_downloads')),'')
+
+        try:
+            if not os.path.exists(movie_library): os.makedirs(movie_library)
+        except:
+            pass
+        try:
+            if not os.path.exists(tv_library): os.makedirs(tv_library)
+        except:
+            pass
         #if not os.path.exists(tv_downloads) and tv_downloads!='' : os.makedirs(tv_downloads)
         #if not os.path.exists(movie_downloads) and movie_downloads != '': os.makedirs(movie_downloads)
 
@@ -99,7 +106,7 @@ class navigator:
     def movies(self):
         self.addDirectoryItem(30021, 'movieGenres', 'movieGenres.jpg', 'DefaultMovies.png')
         self.addDirectoryItem(30022, 'movieYears', 'movieYears.jpg', 'DefaultMovies.png')
-        #self.addDirectoryItem(30023, 'moviePersons', 'movies.jpg', 'DefaultMovies.png')
+        self.addDirectoryItem(30023, 'moviePersons', 'movies.jpg', 'DefaultMovies.png')
         #self.addDirectoryItem(30024, 'movieCertificates', 'movieCertificates.jpg', 'DefaultMovies.png')
         self.addDirectoryItem(30025, 'movies&url=featured', 'movies.jpg', 'DefaultRecentlyAddedMovies.png')
         self.addDirectoryItem(30026, 'movies&url=trending', 'moviesTrending.jpg', 'DefaultRecentlyAddedMovies.png')
@@ -110,7 +117,7 @@ class navigator:
         self.addDirectoryItem(30031, 'movies&url=theaters', 'moviesTheaters.jpg', 'DefaultRecentlyAddedMovies.png')
         self.addDirectoryItem(30032, 'movies&url=added', 'moviesAdded.jpg', 'DefaultRecentlyAddedMovies.png')
         self.addDirectoryItem(30033, 'movieFavourites', 'movieFavourites.jpg', 'DefaultMovies.png')
-        #self.addDirectoryItem(30034, 'moviePerson', 'moviePerson.jpg', 'DefaultMovies.png')
+        self.addDirectoryItem(30034, 'moviePerson', 'moviePerson.jpg', 'DefaultMovies.png')
         self.addDirectoryItem(30035, 'movieSearch', 'movieSearch.jpg', 'DefaultMovies.png')
 
         self.endDirectory()
@@ -119,7 +126,7 @@ class navigator:
     def tvshows(self):
         self.addDirectoryItem(30051, 'tvGenres', 'tvGenres.jpg', 'DefaultTVShows.png')
         self.addDirectoryItem(30052, 'tvYears', 'tvshows.jpg', 'DefaultTVShows.png')
-        #self.addDirectoryItem(30053, 'tvNetworks', 'tvshows.jpg', 'DefaultTVShows.png')
+        self.addDirectoryItem(30053, 'tvNetworks', 'tvshows.jpg', 'DefaultTVShows.png')
         self.addDirectoryItem(30054, 'tvshows&url=trending', 'tvshowsTrending.jpg', 'DefaultRecentlyAddedEpisodes.png')
         self.addDirectoryItem(30055, 'tvshows&url=popular', 'tvshowsPopular.jpg', 'DefaultTVShows.png')
         #self.addDirectoryItem(30056, 'tvshows&url=airing', 'tvshows.jpg', 'DefaultTVShows.png')
@@ -184,16 +191,15 @@ class navigator:
 
     def tools(self):
         self.addDirectoryItem(30111, 'openSettings&query=0.0', 'settings.jpg', 'DefaultAddonProgram.png')
-        self.addDirectoryItem(30112, 'openSettings&query=6.1', 'settings.jpg', 'DefaultAddonProgram.png')
+        self.addDirectoryItem(30112, 'openSettings&query=5.1', 'settings.jpg', 'DefaultAddonProgram.png')
         self.addDirectoryItem(30113, 'openSettings&query=1.0', 'settings.jpg', 'DefaultAddonProgram.png')
-        self.addDirectoryItem(30114, 'openSettings&query=9.0', 'settings.jpg', 'DefaultAddonProgram.png')
+        self.addDirectoryItem(30114, 'openSettings&query=8.0', 'settings.jpg', 'DefaultAddonProgram.png')
         self.addDirectoryItem(30115, 'openSettings&query=2.0', 'settings.jpg', 'DefaultAddonProgram.png')
         self.addDirectoryItem(30116, 'openSettings&query=3.0', 'settings.jpg', 'DefaultAddonProgram.png')
         self.addDirectoryItem(30117, 'openSettings&query=4.0', 'settings.jpg', 'DefaultAddonProgram.png')
-        self.addDirectoryItem(30118, 'openSettings&query=5.0', 'settings.jpg', 'DefaultAddonProgram.png')
         self.addDirectoryItem(30119, 'clearSources', 'cache.jpg', 'DefaultAddonProgram.png')
         self.addDirectoryItem(30120, 'clearCache', 'cache.jpg', 'DefaultAddonProgram.png')
-        self.addDirectoryItem(30122, 'openSettings&query=8.0', 'settings.jpg', 'DefaultAddonProgram.png')
+        self.addDirectoryItem(30122, 'openSettings&query=7.0', 'settings.jpg', 'DefaultAddonProgram.png')
         self.addDirectoryItem(30121, 'libtoolNavigator', 'tools.jpg', 'DefaultAddonProgram.png')
         #self.addDirectoryItem(30141, 'openSettings&query=10.0', 'tools.jpg', 'DefaultAddonProgram.png')
 

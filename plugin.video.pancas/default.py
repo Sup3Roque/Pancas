@@ -10,6 +10,9 @@ import xbmcvfs
 import traceback
 import cookielib,base64
 
+try: import urlresolver
+except: pass
+
 from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP
 viewmode=None
 try:
@@ -25,6 +28,10 @@ import time
 from resources.lib.libraries import client
 from resources.lib.libraries import client2
 from resources.lib.libraries import control
+from resources.lib.resolvers import realdebrid
+from resources.lib.resolvers import premiumize
+
+
 
 tsdownloader=False
 resolve_url=['180upload.com', 'allmyvideos.net', 'embedupload.com' 'bestreams.net', 'clicknupload.com', 'cloudzilla.to', 'movshare.net', 'novamov.com', 'nowvideo.sx', 'videoweed.es', 'daclips.in', 'datemule.com', 'fastvideo.in', 'faststream.in', 'filehoot.com', 'filenuke.com', 'sharesix.com',  'plus.google.com', 'picasaweb.google.com', 'gorillavid.com', 'gorillavid.in', 'grifthost.com', 'hugefiles.net', 'ipithos.to', 'ishared.eu', 'kingfiles.net', 'mail.ru', 'my.mail.ru', 'videoapi.my.mail.ru', 'mightyupload.com', 'mooshare.biz', 'movdivx.com', 'movpod.net', 'movpod.in', 'movreel.com', 'mrfile.me', 'nosvideo.com', 'openload.co', 'played.to', 'bitshare.com', 'filefactory.com', 'k2s.cc', 'oboom.com', 'rapidgator.net', 'uploaded.net', 'primeshare.tv', 'bitshare.com', 'filefactory.com', 'k2s.cc', 'oboom.com', 'rapidgator.net', 'uploaded.net', 'sharerepo.com', 'stagevu.com', 'streamcloud.eu', 'streamin.to', 'thefile.me', 'thevideo.me', 'tusfiles.net', 'uploadc.com', 'zalaa.com', 'uploadrocket.net', 'uptobox.com', 'v-vids.com', 'veehd.com', 'vidbull.com', 'videomega.tv', 'vidplay.net', 'vidspot.net', 'vidto.me', 'vidzi.tv', 'vimeo.com', 'vk.com', 'vodlocker.com', 'xfileload.com', 'xvidstage.com', 'zettahost.tv']
@@ -80,164 +87,572 @@ def addon_log(string):
 
         
         
-FF_USER_AGENT = urllib.quote_plus('Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0')
-openloadhdr = {
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-    'Accept-Encoding': 'none',
-    'Accept-Language': 'en-US,en;q=0.8',
-    'Connection': 'keep-alive'}
-
-def solve(url):
-    #try:
-    control.log('[openload] - 1 %s' % url)
-    if check(url) == False: return
-    control.log('[openload] - 2 %s' % url)
-    id = re.compile('//.+?/(?:embed|f)/([0-9a-zA-Z-_]+)').findall(url)[0]
-    myurl = 'https://openload.co/embed/%s' % id
 
 
-    html = client.request(myurl, headers=openloadhdr)
 
-    videourl = decodeOpenLoad(html)
-    control.log('[openload] - 2 %s' % videourl)
-
-    return videourl
-
-def check(url):
+def request3(url):
     try:
-        ifstream = re.search('//.+?/(?:embed|f)/([0-9a-zA-Z-_]+)',(url)[0])
-        if ifstream: return True
-        id = re.compile('//.+?/(?:embed|f)/([0-9a-zA-Z-_]+)').findall(url)[0]
-        url = 'https://openload.co/embed/%s/' % id
+        control.log("#RESOLVER#  my url 1 ************ %s " % url)
 
-        result = client2.http_get(url)
-        if result == None: return False
-        if '>We are sorry!<' in result: return False
-        return True
+        if '</regex>' in url:
+            import regex ; url = regex.resolve(url)
+
+        rd = realdebrid.resolve(url)
+        #control.log("#RESOLVER#  my rd 2 ************ %s url: %s" % (rd,url))
+
+        if not rd == None: return rd
+
+        pz = premiumize.resolve(url)
+        if not pz == None: return pz
+
+        if url.startswith('rtmp'):
+            if len(re.compile('\s*timeout=(\d*)').findall(url)) == 0: url += ' timeout=10'
+            return url
+
+        try:
+            z=False
+            hmf = urlresolver.HostedMediaFile(url,include_disabled=True, include_universal=False)
+            if hmf:
+                print 'yay! we can resolve this one'
+                z = hmf.resolve()
+            else:
+                print 'sorry :( no resolvers available to handle this one.'
+
+            control.log("!!!!!!!!! OK #urlresolver#  URL %s " % z)
+
+            if z !=False : return z
+        except Exception as e:
+            control.log("!!!!!!!!! ERROR #urlresolver#  URL %s " % e)
+            pass
+        return None
     except:
-        return False
+        return url
 
 
-def decodeOpenLoad(html):
-    # decodeOpenLoad made by mortael, please leave this line for proper credit :)
-    aastring = re.compile("<script[^>]+>(ﾟωﾟﾉ[^<]+)<", re.DOTALL | re.IGNORECASE).findall(html)
-    hahadec = decodeOpenLoad2(aastring[0])
-    haha = re.compile(r"welikekodi_ya_rly = Math.round([^;]+);", re.DOTALL | re.IGNORECASE).findall(hahadec)[0]
-    haha = eval("int" + haha)
+def info():
+    return [{
+        'class': '',
+        'netloc': ['oboom.com', 'rapidgator.net', 'uploaded.net'],
+        'host': ['Oboom', 'Rapidgator', 'Uploaded'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': True
+    }, {
+        'class': 'okru',
+        'netloc': ['ok.ru']
+    }, {
+        'class': '',
+        'netloc': ['youwatch.com'],
+        'host': ['youwatch'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': '_180upload',
+        'netloc': ['180upload.com'],
+        'host': ['180upload'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'allmyvideos',
+        'netloc': ['allmyvideos.net'],
+        'host': ['Allmyvideos'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'allvid',
+        'netloc': ['allvid.ch'],
+        'host': ['Allvid'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'bestreams',
+        'netloc': ['bestreams.net'],
+        'host': ['Bestreams'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'clicknupload',
+        'netloc': ['clicknupload.com', 'clicknupload.link'],
+        'host': ['Clicknupload'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'cloudtime',
+        'netloc': ['cloudtime.to'],
+        'host': ['Cloudtime'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'cloudyvideos',
+        'netloc': ['cloudyvideos.com'],
+        #'host': ['Cloudyvideos'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'cloudzilla',
+        'netloc': ['cloudzilla.to'],
+        'host': ['Cloudzilla'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'daclips',
+        'netloc': ['daclips.in'],
+        'host': ['Daclips'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'yadisk',
+        'netloc': ['yadi.sk']
+    }, {
+        'class': 'dailymotion',
+        'netloc': ['dailymotion.com']
+    }, {
+        'class': 'datemule',
+        'netloc': ['datemule.com']
+    }, {
+        'class': 'divxpress',
+        'netloc': ['divxpress.com'],
+        'host': ['Divxpress'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'exashare',
+        'netloc': ['exashare.com'],
+        'host': ['Exashare'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'fastvideo',
+        'netloc': ['fastvideo.in', 'faststream.in', 'rapidvideo.ws'],
+        'host': ['Fastvideo', 'Faststream'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'filehoot',
+        'netloc': ['filehoot.com'],
+        'host': ['Filehoot'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'filenuke',
+        'netloc': ['filenuke.com', 'sharesix.com'],
+        'host': ['Filenuke', 'Sharesix'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'filmon',
+        'netloc': ['filmon.com']
+    }, {
+        'class': 'filepup',
+        'netloc': ['filepup.net']
+    }, {
+        'class': 'googledocs',
+        'netloc': ['google.com']
+    }, {
+        'class': 'googledocs',
+        'netloc': ['docs.google.com', 'drive.google.com']
+    }, {
+        'class': 'googlephotos',
+        'netloc': ['photos.google.com']
+    }, {
+        'class': 'googlepicasa',
+        'netloc': ['picasaweb.google.com']
+    }, {
+        'class': 'googleplus',
+        'netloc': ['plus.google.com']
+    }, {
+        'class': 'gorillavid',
+        'netloc': ['gorillavid.com', 'gorillavid.in'],
+        'host': ['Gorillavid'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'grifthost',
+        'netloc': ['grifthost.com'],
+        #'host': ['Grifthost'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'hdcast',
+        'netloc': ['hdcast.me']
+    }, {
+        'class': 'hugefiles',
+        'netloc': ['hugefiles.net'],
+        'host': ['Hugefiles'],
+        'quality': 'High',
+        'captcha': True,
+        'a/c': False
+    }, {
+        'class': 'ipithos',
+        'netloc': ['ipithos.to'],
+        'host': ['Ipithos'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'ishared',
+        'netloc': ['ishared.eu'],
+        'host': ['iShared'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'kingfiles',
+        'netloc': ['kingfiles.net'],
+        'host': ['Kingfiles'],
+        'quality': 'High',
+        'captcha': True,
+        'a/c': False
+    }, {
+        'class': 'letwatch',
+        'netloc': ['letwatch.us'],
+        'host': ['Letwatch'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'mailru',
+        'netloc': ['mail.ru', 'my.mail.ru', 'videoapi.my.mail.ru', 'api.video.mail.ru']
+    }, {
+        'class': 'cloudmailru',
+        'netloc': ['cloud.mail.ru']
+    }, {
+        'class': 'mightyupload',
+        'netloc': ['mightyupload.com'],
+        'host': ['Mightyupload'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'movdivx',
+        'netloc': ['movdivx.com'],
+        'host': ['Movdivx'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'movpod',
+        'netloc': ['movpod.net', 'movpod.in'],
+        'host': ['Movpod'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'movshare',
+        'netloc': ['movshare.net'],
+        'host': ['Movshare'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'mrfile',
+        'netloc': ['mrfile.me'],
+        'host': ['Mrfile'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'mybeststream',
+        'netloc': ['mybeststream.xyz']
+    }, {
+        'class': 'nosvideo',
+        'netloc': ['nosvideo.com'],
+        #'host': ['Nosvideo'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'novamov',
+        'netloc': ['novamov.com'],
+        'host': ['Novamov'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'nowvideo',
+        'netloc': ['nowvideo.eu', 'nowvideo.sx'],
+        'host': ['Nowvideo'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'openload',
+        'netloc': ['openload.io', 'openload.co'],
+        'host': ['Openload'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'p2pcast',
+        'netloc': ['p2pcast.tv']
+    }, {
+        'class': 'primeshare',
+        'netloc': ['primeshare.tv'],
+        'host': ['Primeshare'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'promptfile',
+        'netloc': ['promptfile.com'],
+        'host': ['Promptfile'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'putstream',
+        'netloc': ['putstream.com'],
+        'host': ['Putstream'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'realvid',
+        'netloc': ['realvid.net'],
+        'host': ['Realvid'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'sawlive',
+        'netloc': ['sawlive.tv']
+    }, {
+        'class': 'sharerepo',
+        'netloc': ['sharerepo.com'],
+        'host': ['Sharerepo'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'skyvids',
+        'netloc': ['skyvids.net'],
+        'host': ['Skyvids'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'speedvideo',
+        'netloc': ['speedvideo.net']
+    }, {
+        'class': 'stagevu',
+        'netloc': ['stagevu.com'],
+        'host': ['StageVu'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'streamcloud',
+        'netloc': ['streamcloud.eu'],
+        'host': ['Streamcloud'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'streamin',
+        'netloc': ['streamin.to'],
+        'host': ['Streamin'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'thefile',
+        'netloc': ['thefile.me'],
+        'host': ['Thefile'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'thevideo',
+        'netloc': ['thevideo.me'],
+        'host': ['Thevideo'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'turbovideos',
+        'netloc': ['turbovideos.net'],
+        'host': ['Turbovideos'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'tusfiles',
+        'netloc': ['tusfiles.net'],
+        'host': ['Tusfiles'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'up2stream',
+        'netloc': ['up2stream.com'],
+        'host': ['Up2stream'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'uploadc',
+        'netloc': ['uploadc.com', 'uploadc.ch', 'zalaa.com'],
+        'host': ['Uploadc', 'Zalaa'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'uploadrocket',
+        'netloc': ['uploadrocket.net'],
+        'host': ['Uploadrocket'],
+        'quality': 'High',
+        'captcha': True,
+        'a/c': False
+    }, {
+        'class': 'uptobox',
+        'netloc': ['uptobox.com'],
+        'host': ['Uptobox'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'v_vids',
+        'netloc': ['v-vids.com'],
+        'host': ['V-vids'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'vaughnlive',
+        'netloc': ['vaughnlive.tv', 'breakers.tv', 'instagib.tv', 'vapers.tv']
+    }, {
+        'class': 'veehd',
+        'netloc': ['veehd.com']
+    }, {
+        'class': 'veetle',
+        'netloc': ['veetle.com']
+    }, {
+        'class': 'vidbull',
+        'netloc': ['vidbull.com'],
+        'host': ['Vidbull'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'videomega',
+        'netloc': ['videomega.tv'],
+        #'host': ['Videomega'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'videopremium',
+        'netloc': ['videopremium.tv', 'videopremium.me']
+    }, {
+        'class': 'videoweed',
+        'netloc': ['videoweed.es'],
+        'host': ['Videoweed'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'vidlockers',
+        'netloc': ['vidlockers.ag'],
+        'host': ['Vidlockers'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'vidspot',
+        'netloc': ['vidspot.net'],
+        'host': ['Vidspot'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'vidto',
+        'netloc': ['vidto.me'],
+        'host': ['Vidto'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'vidzi',
+        'netloc': ['vidzi.tv'],
+        'host': ['Vidzi'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'vimeo',
+        'netloc': ['vimeo.com']
+    }, {
+        'class': 'vk',
+        'netloc': ['vk.com']
+    }, {
+        'class': 'vodlocker',
+        'netloc': ['vodlocker.com'],
+        'host': ['Vodlocker'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'xfileload',
+        'netloc': ['xfileload.com'],
+        'host': ['Xfileload'],
+        'quality': 'High',
+        'captcha': True,
+        'a/c': False
+    }, {
+        'class': 'xvidstage',
+        'netloc': ['xvidstage.com'],
+        'host': ['Xvidstage'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'youtube',
+        'netloc': ['youtube.com'],
+        'host': ['Youtube'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'zettahost',
+        'netloc': ['zettahost.tv'],
+        'host': ['Zettahost'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'zstream',
+        'netloc': ['zstream.to'],
+        'host': ['zStream'],
+        'quality': 'Medium',
+        'captcha': False,
+        'a/c': False
+    }, {
+        'class': 'watch1080p',
+        'netloc': ['watch1080p.com'],
+        'host': ['watch1080p'],
+        'quality': 'High',
+        'captcha': False,
+        'a/c': False
+    }]
 
-    videourl1 = decodeOpenLoad2(aastring[haha])
 
-    return videourl1
-
-
-def decodeOpenLoad2(aastring):
-    aastring = aastring.replace("(ﾟДﾟ)[ﾟεﾟ]+(oﾟｰﾟo)+ ((c^_^o)-(c^_^o))+ (-~0)+ (ﾟДﾟ) ['c']+ (-~-~1)+", "")
-    aastring = aastring.replace("((ﾟｰﾟ) + (ﾟｰﾟ) + (ﾟΘﾟ))", "9")
-    aastring = aastring.replace("((ﾟｰﾟ) + (ﾟｰﾟ))", "8")
-    aastring = aastring.replace("((ﾟｰﾟ) + (o^_^o))", "7")
-    aastring = aastring.replace("((o^_^o) +(o^_^o))", "6")
-    aastring = aastring.replace("((ﾟｰﾟ) + (ﾟΘﾟ))", "5")
-    aastring = aastring.replace("(ﾟｰﾟ)", "4")
-    aastring = aastring.replace("((o^_^o) - (ﾟΘﾟ))", "2")
-    aastring = aastring.replace("(o^_^o)", "3")
-    aastring = aastring.replace("(ﾟΘﾟ)", "1")
-    aastring = aastring.replace("(+!+[])", "1")
-    aastring = aastring.replace("(c^_^o)", "0")
-    aastring = aastring.replace("(0+0)", "0")
-    aastring = aastring.replace("(ﾟДﾟ)[ﾟεﾟ]", "\\")
-    aastring = aastring.replace("(3 +3 +0)", "6")
-    aastring = aastring.replace("(3 - 1 +0)", "2")
-    aastring = aastring.replace("(!+[]+!+[])", "2")
-    aastring = aastring.replace("(-~-~2)", "4")
-    aastring = aastring.replace("(-~-~1)", "3")
-    aastring = aastring.replace("(-~0)", "1")
-    aastring = aastring.replace("(-~1)", "2")
-    aastring = aastring.replace("(-~3)", "4")
-    aastring = aastring.replace("(0-0)", "0")
-
-    decodestring = re.search(r"\\\+([^(]+)", aastring, re.DOTALL | re.IGNORECASE).group(1)
-    decodestring = "\\+" + decodestring
-    decodestring = decodestring.replace("+", "")
-    decodestring = decodestring.replace(" ", "")
-
-    decodestring = decode(decodestring)
-    decodestring = decodestring.replace("\\/", "/")
-
-    if 'toString' in decodestring:
-        base = re.compile(r"toString\(a\+(\d+)", re.DOTALL | re.IGNORECASE).findall(decodestring)[0]
-        base = int(base)
-        match = re.compile(r"(\(\d[^)]+\))", re.DOTALL | re.IGNORECASE).findall(decodestring)
-        for repl in match:
-            match1 = re.compile(r"(\d+),(\d+)", re.DOTALL | re.IGNORECASE).findall(repl)
-            base2 = base + int(match1[0][0])
-            repl2 = base10toN(int(match1[0][1]), base2)
-            decodestring = decodestring.replace(repl, repl2)
-        decodestring = decodestring.replace("+", "")
-        decodestring = decodestring.replace("\"", "")
-        videourl = re.search(r"(http[^\}]+)", decodestring, re.DOTALL | re.IGNORECASE).group(1)
-        videourl = videourl.replace("https", "http")
-    else:
-        return decodestring
-
-    UA = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0'
-    headers = {'User-Agent': UA}
-
-    req = urllib2.Request(videourl, None, headers)
-    res = urllib2.urlopen(req)
-    videourl = res.geturl()
-
-    return videourl
-
-def decode(encoded):
-    for octc in (c for c in re.findall(r'\\(\d{2,3})', encoded)):
-        encoded = encoded.replace(r'\%s' % octc, chr(int(octc, 8)))
-    return encoded.decode('utf8')
-
-
-def base10toN(num, n):
-    num_rep = {10: 'a',
-               11: 'b',
-               12: 'c',
-               13: 'd',
-               14: 'e',
-               15: 'f',
-               16: 'g',
-               17: 'h',
-               18: 'i',
-               19: 'j',
-               20: 'k',
-               21: 'l',
-               22: 'm',
-               23: 'n',
-               24: 'o',
-               25: 'p',
-               26: 'q',
-               27: 'r',
-               28: 's',
-               29: 't',
-               30: 'u',
-               31: 'v',
-               32: 'w',
-               33: 'x',
-               34: 'y',
-               35: 'z'}
-    new_num_string = ''
-    current = num
-    while current != 0:
-        remainder = current % n
-        if 36 > remainder > 9:
-            remainder_string = num_rep[remainder]
-        elif remainder >= 36:
-            remainder_string = '(' + str(remainder) + ')'
-        else:
-            remainder_string = str(remainder)
-        new_num_string = remainder_string + new_num_string
-        current = current / n
-
-
-    return new_num_string
         
         
  
@@ -3224,10 +3639,13 @@ elif mode==19:
     temp=url.encode("utf-8")
     if temp.find("openload") == -1:
         addon_log("Genesiscommonresolvers")
+        tempww = request3(url)
+        ##playsetresolved (tempww,name,iconimage,True)
         playsetresolved (urlsolver(url),name,iconimage,True)        
     else:
         addon_log("Cena Openload")
-        playsetresolved (urlsolver(url),name,iconimage,True)
+        tempww = request3(url)
+        playsetresolved (tempww,name,iconimage,True)
 
 
 elif mode==21:

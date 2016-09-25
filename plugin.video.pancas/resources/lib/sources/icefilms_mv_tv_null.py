@@ -28,8 +28,8 @@ from resources.lib import resolvers
 
 class source:
     def __init__(self):
-        self.base_link = 'http://ipv6.icefilms.info'
-        self.link_1 = 'http://ipv6.icefilms.info'
+        self.base_link = 'http://www.icefilms.info'
+        self.link_1 = 'http://www.icefilms.info'
         self.link_2 = 'https://icefilms.unblocked.pw'
         self.moviesearch_link = '/movies/a-z/%s'
         self.tvsearch_link = '/tv/a-z/%s'
@@ -47,7 +47,7 @@ class source:
             result = ''
             links = [self.link_1]
             for base_link in links:
-                result = client.source(urlparse.urljoin(base_link, query), headers=self.headers)
+                result = client.request(urlparse.urljoin(base_link, query), headers=self.headers)
                 if 'Donate' in str(result): break
 
             imdb = re.sub('[^0-9]', '', imdb)
@@ -74,7 +74,7 @@ class source:
             result = ''
             links = [self.link_1]
             for base_link in links:
-                result = client.source(urlparse.urljoin(base_link, query), headers=self.headers)
+                result = client.request(urlparse.urljoin(base_link, query), headers=self.headers)
                 if 'Donate' in str(result): break
 
             imdb = re.sub('[^0-9]', '', imdb)
@@ -99,7 +99,7 @@ class source:
             result = ''
             links = [self.link_1]
             for base_link in links:
-                result = client.source(urlparse.urljoin(base_link, url), headers=self.headers)
+                result = client.request(urlparse.urljoin(base_link, url), headers=self.headers)
                 if 'Donate' in str(result): break
 
             result = result.decode('iso-8859-1').encode('utf-8')
@@ -126,7 +126,7 @@ class source:
             result = ''
             links = [self.link_1]
             for base_link in links:
-                result = client.source(urlparse.urljoin(base_link, url), headers=self.headers)
+                result = client.request(urlparse.urljoin(base_link, url), headers=self.headers)
                 if 'ripdiv' in str(result): break
 
             result = result.decode('iso-8859-1').encode('utf-8')
