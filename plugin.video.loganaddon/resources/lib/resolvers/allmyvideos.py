@@ -21,6 +21,8 @@
 
 import re,urllib
 from resources.lib.libraries import client
+from resources.lib.libraries import control
+
 import xbmc
 
 def resolve(url):
@@ -28,6 +30,7 @@ def resolve(url):
         url = url.replace('/embed-', '/')
         url = re.compile('//.+?/([\w]+)').findall(url)[0]
         page = 'http://allmyvideos.net/%s' % url
+        control.log('AAA Page %s' % page)
 
         result = client.request(page, close=False)
 
@@ -35,15 +38,17 @@ def resolve(url):
         f = client.parseDOM(result, 'form', attrs = {'action': ''})
         k = client.parseDOM(f, 'input', ret='name', attrs = {'type': 'hidden'})
         for i in k: post.update({i: client.parseDOM(f, 'input', ret='value', attrs = {'name': i})[0]})
-        post = post
+        post = urllib.urlencode(post)
 
         result = client.request(page, post=post)
 
-        url = re.compile('"file" *: *"(http.+?)"').findall(result)[-1]
+        url = re.compile('"file" *: *"(http.+?)"').findall(result)
+        #control.log('AAA Page %s' % url)
+        url = url[-1]
         url += '&direct=false&ua=false'
         xbmc.sleep(2000)
         #return url + '|' + urllib.urlencode({ 'User-Agent': client.IE_USER_AGENT })
-        return
+        return url
     except:
         return
 

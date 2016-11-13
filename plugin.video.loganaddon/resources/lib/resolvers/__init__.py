@@ -25,12 +25,12 @@ from resources.lib.libraries import client
 from resources.lib.libraries import control
 from resources.lib.resolvers import realdebrid
 from resources.lib.resolvers import premiumize
-
+import urlresolver
 
 
 def request(url):
     try:
-        #control.log("#RESOLVER#  my url 1 ************ %s " % url)
+        control.log("#RESOLVER#  my url 1 ************ %s " % url)
 
         if '</regex>' in url:
             import regex ; url = regex.resolve(url)
@@ -47,35 +47,22 @@ def request(url):
             if len(re.compile('\s*timeout=(\d*)').findall(url)) == 0: url += ' timeout=10'
             return url
 
-        #u = client.shrink_host(url)
-        u = urlparse.urlparse(url).netloc
-        u = u.replace('www.', '').replace('embed.', '')
-        u = u.lower()
+        try:
+            z=False
+            hmf = urlresolver.HostedMediaFile(url,include_disabled=True, include_universal=False)
+            if hmf:
+                print 'yay! we can resolve this one'
+                z = hmf.resolve()
+            else:
+                print 'sorry :( no resolvers available to handle this one.'
 
-        #control.log("#RESOLVER#  URL TO MATCH url 3 ************ %s " % u)
+            control.log("!!!!!!!!! OK #urlresolver#  URL %s " % z)
 
-        r = [i['class'] for i in info() if u in i['netloc']][0]
-        r = __import__(r, globals(), locals(), [], -1)
-        #control.log("#RESOLVER#  my url 4 ************ %s " % r)
-
-        r = r.resolve(url)
-        #control.log("#RESOLVER#  my url 5 %s ************ %s " % (r,url))
-
-        if r == None: return r
-
-        elif type(r) == list: return r
-        #elif not r.startswith('http'): return r
-
-        try: h = dict(urlparse.parse_qsl(r.rsplit('|', 1)[1]))
-        except: h = dict('')
-
-        if not 'User-Agent' in h: h['User-Agent'] = client.agent()
-        if not 'Referer' in h: h['Referer'] = url
-
-        r = '%s|%s' % (r.split('|')[0], urllib.urlencode(h))
-        #control.log("#RESOLVER#  my url 6 %s ************ %s " % (r,url))
-
-        return r
+            if z !=False : return z
+        except Exception as e:
+            control.log("!!!!!!!!! ERROR #urlresolver#  URL %s " % e)
+            pass
+        return None
     except:
         return url
 
@@ -88,6 +75,16 @@ def info():
         'quality': 'High',
         'captcha': False,
         'a/c': True
+    }, {
+        'class': 'okru',
+        'netloc': ['ok.ru']
+    }, {
+        'class': '',
+        'netloc': ['youwatch.com'],
+        'host': ['youwatch'],
+        'quality': 'Low',
+        'captcha': False,
+        'a/c': False
     }, {
         'class': '_180upload',
         'netloc': ['180upload.com'],
@@ -451,7 +448,7 @@ def info():
         'class': 'uploadc',
         'netloc': ['uploadc.com', 'uploadc.ch', 'zalaa.com'],
         'host': ['Uploadc', 'Zalaa'],
-        'quality': 'High',
+        'quality': 'Medium',
         'captcha': False,
         'a/c': False
     }, {
@@ -581,7 +578,7 @@ def info():
         'class': 'zstream',
         'netloc': ['zstream.to'],
         'host': ['zStream'],
-        'quality': 'High',
+        'quality': 'Medium',
         'captcha': False,
         'a/c': False
     }, {

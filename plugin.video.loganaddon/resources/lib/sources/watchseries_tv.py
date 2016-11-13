@@ -41,10 +41,7 @@ class NoRedirection(urllib2.HTTPErrorProcessor):
 
 class source:
     def __init__(self):
-        self.base_link = 'http://watchseries.ag'
-        self.link_1 = 'http://watchseries.ag'
-        self.link_2 = 'http://translate.googleusercontent.com/translate_c?anno=2&hl=en&sl=mt&tl=en&u=http://watchseries.ag'
-        self.link_3 = 'https://watchseries.unblocked.pw'
+        self.base_link = 'http://watchseriesfree.to'
         self.search_link = '/AdvancedSearch/%s-%s/by_popularity/%s'
         self.episode_link = '/episode/%s_s%s_e%s.html'
         self.headers = {}
@@ -55,11 +52,7 @@ class source:
             query = self.search_link % (str(int(year)-1), str(int(year)+1), urllib.quote_plus(tvshowtitle))
 
             result = ''
-            links = [self.link_1, self.link_2, self.link_3]
-            for base_link in links:
-                result = client.source(urlparse.urljoin(base_link, query), headers=self.headers)
-                if 'episode-summary' in str(result): break
-
+            result = client.request(urlparse.urljoin(self.base_link, query))
             result = result.decode('iso-8859-1').encode('utf-8')
             result = client.parseDOM(result, 'div', attrs = {'class': 'episode-summary'})[0]
             result = client.parseDOM(result, 'tr')
@@ -86,7 +79,7 @@ class source:
                     if len(match) > 0:
                         url = match[0]
                         break
-                    result = client.source(base_link + i, headers=self.headers)
+                    result = client.request(self.base_link + i, headers=self.headers)
                     if str(imdb) in str(result):
                         url = i
                         break
@@ -114,16 +107,20 @@ class source:
         try:
             self.sources =[]
             mylinks = []
-
+            hostDict = hostDict.sort()
+            for i in hostDict:
+                control.log("WA HO %s" % i)
             if url == None: return self.sources
 
             url = url.replace('/json/', '/')
 
             result = ''
-            links = [self.link_1, self.link_2, self.link_3]
-            for base_link in links:
-                result = client.source(urlparse.urljoin(base_link, url), headers=self.headers)
-                if 'lang_1' in str(result): break
+
+            result, headers, content, cookie  = client.request(urlparse.urljoin(self.base_link, url), output='extended')
+            #result, headers, content, cookie = client.request(url, limit='0', output='extended')
+
+            self.headers['Referer'] = urlparse.urljoin(self.base_link, url)
+            self.headers['Cookie'] = cookie
 
             result = result.replace('\n','')
             result = result.decode('iso-8859-1').encode('utf-8')
@@ -137,7 +134,7 @@ class source:
                     host = i[1]
                     host = host.split('.', 1)[0]
                     host = host.strip().lower()
-                    if not host in hostDict: raise Exception()
+                    #if not host in hostDict: raise Exception()
                     host = client.replaceHTMLCodes(host)
                     host = host.encode('utf-8')
 
@@ -151,13 +148,12 @@ class source:
 
                     url = url.replace('/json/', '/')
                     url = urlparse.urlparse(url).path
-                    #sources.append({'source': host, 'quality': 'SD', 'provider': 'Watchseries', 'url': url})
                     mylinks.append([url, 'SD'])
                 except:
                     pass
 
             threads = []
-            for i in mylinks: threads.append(workers.Thread(self.check, i))
+            for i in mylinks: threads.append(workers.Thread(self.check, i, hostDict))
             [i.start() for i in threads]
             for i in range(0, 10 * 2):
                 is_alive = [x.is_alive() for x in threads]
@@ -168,56 +164,27 @@ class source:
             return self.sources
 
 
-    def check(self, i):
+    def check(self, i, hostDict):
         try:
             url = client.replaceHTMLCodes(i[0])
             url = url.encode('utf-8')
             result = ''
-            links = [self.link_1, self.link_2, self.link_3]
-            for base_link in links:
-                try:
-                    opener = urllib2.build_opener(NoRedirection)
-                    opener.addheaders = [('User-Agent', 'Apple-iPhone')]
-                    opener.addheaders = [('Referer', base_link + url)]
-                    response = opener.open(base_link + url)
-                    result = response.read()
-                    response.close()
-                except:
-                    result = ''
-                if 'myButton' in result: break
-
-            url = re.compile('class=[\'|\"]*myButton.+?href=[\'|\"|\s|\<]*(.+?)[\'|\"|\s|\>]').findall(result)[
-                0]
-
+            result = client.request(urlparse.urljoin(self.base_link, url), headers=self.headers)
+            url = re.compile('class=[\'|\"]*myButton.+?href=[\'|\"|\s|\<]*(.+?)[\'|\"|\s|\>]').findall(result)[0]
+            print("URL2",url,i[1])
+            control.log("WATCHSERIES CHECK %s | url: %s" % (url,i[0]))
             url = client.replaceHTMLCodes(url)
-            try:
-                url = urlparse.parse_qs(urlparse.urlparse(url).query)['u'][0]
-            except:
-                pass
-            try:
-                url = urlparse.parse_qs(urlparse.urlparse(url).query)['url'][0]
-            except:
-                pass
-
 
             host = urlparse.urlparse(url).netloc
             host = host.replace('www.', '').replace('embed.', '')
-            host = host.rsplit('.', 1)[0]
             host = host.lower()
+            if not host in hostDict:
+                control.log("WATCHSERIES HOST %s" % host)
+                raise Exception()
+
+            host = host.rsplit('.', 1)[0]
             host = client.replaceHTMLCodes(host)
             host = host.encode('utf-8')
-            #control.log('WWWW WATCHSERIES RESOLVE-2 host: %s url: %s ' % (host,url))
-
-            #if host == 'openload':check = openload.check(url)
-            #elif host == 'streamin':check = streamin.check(url)
-            #elif host == 'cloudzilla':
-            #    check = cloudzilla.check(url)
-            #elif host == 'zstream':
-            #    check = zstream.check(url)
-            #elif host == 'vidspot':
-            #    check = vidspot.check(url)
-            if host == 'up2stream': raise Exception()
-            if host == 'mightyupload': raise Exception()
 
             self.sources.append({'source': host, 'quality': i[1], 'provider': 'Watchseries', 'url': url})
         except:
