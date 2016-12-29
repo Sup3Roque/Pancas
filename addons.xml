@@ -70,6 +70,40 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.Anima.PT"
+       name="Anima.PT"
+       version="1.0.0"
+       provider-name="Animação PT">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.simple.downloader" version="0.9.4"/>
+    <import addon="script.module.beautifulsoup4" />
+    <import addon="script.module.requests" />
+    <import addon="script.module.httplib2" />
+    <import addon="script.module.liveresolver" version="0.1.24" optional="true"/>
+    <import addon="script.module.youtube.dl" optional="false"/>
+    <import addon="plugin.video.youtube" optional="false" />
+    <import addon="script.module.urlresolver" optional="false"/>
+    <import addon="script.module.simplejson" />
+     <import addon="script.module.livestreamer" optional="true"/>
+     <import addon="script.module.pyamf" optional="true"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+
+
+  <extension point="xbmc.addon.metadata">
+    <summary>Desenhos animados em Português</summary>
+    <description>
+        Criado para vocês! Obrigado por estarem nas nossas vidas.
+
+    </description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.loganaddon" name="loganaddon TV" version="2.0" provider-name="Vitor Pereira e Pedro Selva">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -191,20 +225,6 @@
     </description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="repository.sembilhete.tv" name="sembilhete.tv repository" version="0.0.1" provider-name="Sem Bilhete">
-	<extension point="xbmc.addon.repository" name="sembilhete.tv Repository">
-		<info compressed="false">https://sembilhete.tv/static/kodi/addons.xml</info>
-		<checksum>https://sembilhete.tv/static/kodi/addons.xml.md5</checksum>
-		<datadir zip="true">https://sembilhete.tv/static/kodi/repo/</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Sem Bilhete Addon</summary>
-		<description>Addon Description</description>
-		<disclaimer></disclaimer>
-		<platform>all</platform>
-	</extension>
 </addon>
 
 <addon id="repository.SonsOfAnarchy" name="Sons Of Anarchy" version="1.0" provider-name="Sons Of Anarchy">
