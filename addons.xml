@@ -85,6 +85,37 @@
   </extension>
 </addon>
 
+<addon id="repository.aresproject" name="[COLOR blue]A[/COLOR][COLOR white]res Project[/COLOR]" version="0.0.6" provider-name="Ares Team">
+	<extension point="xbmc.addon.repository" name="AresRepo">
+		<info compressed="false">http://repo.ares-project.com/plugins/addons.xml</info>
+		<checksum>http://repo.ares-project.com/plugins/addons.xml.md5</checksum>
+		<datadir zip="true">http://repo.ares-project.com/plugins/</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>AresProject.</summary>
+		<description>Ares-Project Addons Source. Visit Us At https://ares-project.uk</description>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+<addon id="repository.colossus" name="[COLOR gold]Colossal Repository[/COLOR]" version="999.999.2" provider-name="Colossal">
+    <extension point="xbmc.addon.repository" name="[COLOR gold]Colossal Repository[/COLOR]">
+    <dir>
+        <info compressed="false">https://raw.githubusercontent.com/Colossal1/repository.colossus.common/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/Colossal1/repository.colossus.common/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/Colossal1/repository.colossus.common/master/</datadir>
+    </dir>
+        <info compressed="false">https://raw.githubusercontent.com/Colossal1/repository.colossus/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/Colossal1/repository.colossus/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/Colossal1/repository.colossus/master/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Home Of 3rd Party Addons</summary>
+        <description></description>
+        <platform>all</platform>
+    </extension>
+</addon>
+
 <addon id="repository.filmkodi.com" name="Filmkodi.com repository - MRKNOW" version="2.1.0" provider-name="Mrknow">
 	<extension point="xbmc.addon.repository" name="Filmkodi.com Kodi Add-on Repository">
 		<info compressed="false">http://kodi.filmkodi.com/addons.xml</info>
@@ -145,6 +176,24 @@
     </description>
     <platform>all</platform>
   </extension>
+</addon>
+
+﻿<addon id="repository.smash" name="Smash repository" version="1.0.1" provider-name="SMASH">
+	<extension point="xbmc.addon.repository" name="Smash repository">
+	<dir>
+        <info compressed="false">http://mediarepos.net/Repos/smashrepo/addons.xml</info>
+        <checksum>http://mediarepos.net/Repos/smashrepo/addons.xml.md5</checksum>
+        <datadir zip="true">http://mediarepos.net/Repos/smashrepo/</datadir>
+	</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Under This Repo, I Will Host Addons With No Home,Bring Life To Dead Addons That Fully Work, Link To Repos From Devs (This will install current version the Dev Has) </summary>
+		<description lang="en">The People Under Some of the Kodi Groups made a big deal about me getting donations if you want to hep no matter what ppl say you can donate here paypal.me/BrianSMASH</description>
+		<platform>all</platform>
+		<forum></forum>
+        <website></website>
+		<news>sometimes people hate when someone ask for donations but if imma host so called addons and they not and other repos for devs which i am i made two for two guys with addons then donations help with hosting and vps cost which will be settings up</news>
+	</extension>
 </addon>
 
 <addon id="teamtuga4ever.repository" name="Teamtuga4ever Repository" version="1.8" provider-name="Teamtuga4ever">
