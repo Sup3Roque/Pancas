@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="tvsupertuga.repository" name="[COLOR cyan]TV[/COLOR]-[COLOR red]SUPERTUGA[/COLOR].[COLOR limegreen]REPOSITORY[/COLOR]" version="0.0.6" provider-name="TVsupertuga">
-	<extension point="xbmc.addon.repository" name="tvsupertuga Repository">
-		<info compressed="false">http://tvsupertuga.net16.net/zips/addons.xml</info>
-		<checksum>http://tvsupertuga.net16.net/zips/addons.xml.md5</checksum>
-		<datadir zip="true">http://tvsupertuga.net16.net/instal/</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>tvsupertuga repository</summary>
-		<description></description>
-		<disclaimer></disclaimer>
-		<platform>all</platform>
-	</extension>
+<addon id="tvsupertuga.repository" name="[COLOR cyan]TV[/COLOR][COLOR red]supertuga[/COLOR].[COLOR limegreen]Repository[/COLOR]" version="0.0.8" provider-name="TVsupertuga">
+    <extension point="xbmc.addon.repository" name="TVsupertuga Repository">
+        <dir>
+            <info compressed="false">http://tvsupertuga.xyz/tvsupertuga.repository/addons.xml</info>
+            <checksum>http://tvsupertuga.xyz/tvsupertuga.repository/addons.xml.md5</checksum>
+            <datadir zip="true">http://tvsupertuga.xyz/tvsupertuga.repository/instal/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/PROJECTOTEAM/base/master/baseaddons.repository/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/PROJECTOTEAM/base/master/baseaddons.repository/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/PROJECTOTEAM/base/master/baseaddons.repository/instal/</datadir>
+        </dir>
+        <info compressed="false">https://raw.githubusercontent.com/repotvsupertuga/tvsupertuga.repository/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/repotvsupertuga/tvsupertuga.repository/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/repotvsupertuga/tvsupertuga.repository/instal/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+		<summary lang="pt">TVsupertuga </summary>
+		<description lang="pt">rdftgyhu</description>
+		<forum>http://tvsupertuga.forum-gratuito.com/</forum>
+		<website>https://www.facebook.com/TVsupertuga.PT/</website>		
+        <platform>all</platform>
+    </extension>
 </addon>

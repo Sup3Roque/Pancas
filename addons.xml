@@ -30,76 +30,29 @@
 	</extension>
 </addon>
 
-    <addon id="plugin.program.addoninstaller" version="1.2.9"
-    	name="Addon Installer" provider-name="tvaddons.ag, Blazetamer">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-        <import addon="script.module.addon.common" optional="true" />
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Addon Browser</summary>
-        <description>Its like an App Store where you'll find Addons for Kodi, and everything is free!</description>
-        <disclaimer>By using this, you take reponsibility for anything that happens.</disclaimer>
-        <language>en</language>
-        <platform>all</platform>
-        <forum>http://forums.tvaddons.ag/forums/156-ADDON-INSTALLER</forum>
-        <website>http://addons.tvaddons.ag/</website>
-        <source></source>
-        <email></email>
-    </extension>
-</addon>
-
-<addon id="plugin.program.pancaswizard" name="Pancas Wizard" version="1.0.0" provider-name="http://tiny.cc/PancasFacebook">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-	<import addon="script.module.addon.common" />
-
-
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>executable</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-		<summary>Wizard da [COLOR aqua]Pancas Team[/COLOR]</summary>
-		<description>Fork from PsychoWizard, thanks you guys!!!</description>
-		<disclaimer></disclaimer>
-	<platform>all</platform>
-  </extension>
-</addon>
-
 <addon id="plugin.video.Anima.PT"
        name="Anima.PT"
-       version="1.0.0"
+       version="1.0.1"
        provider-name="Animação PT">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4" />
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.liveresolver" version="0.1.24" optional="true"/>
-    <import addon="script.module.youtube.dl" optional="false"/>
-    <import addon="plugin.video.youtube" optional="false" />
-    <import addon="script.module.urlresolver" optional="false"/>
-    <import addon="script.module.simplejson" />
-     <import addon="script.module.livestreamer" optional="true"/>
-     <import addon="script.module.pyamf" optional="true"/>
+	<import addon="script.module.beautifulsoup" version="3.2.1"/>
+	<import addon="script.module.simple.downloader" version="0.9.4"/>
+	<import addon="script.module.beautifulsoup4"/>
+	<import addon="script.module.requests"/>
+	<import addon="script.module.httplib2"/>
+    <import addon="script.module.simplejson" version="3.3.0"/>
+    <import addon="script.module.urlresolver"  version="2.1.2"/>
+    <import addon="script.common.plugin.cache" version="2.5.2"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
+    <import addon="plugin.video.youtube" optional="true" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
+        <provides>video</provides>
   </extension>
-
-
   <extension point="xbmc.addon.metadata">
-    <summary>Desenhos animados em Português</summary>
-    <description>
-        Criado para vocês! Obrigado por estarem nas nossas vidas.
-
-    </description>
+    <summary lang="en">Desenhos animados em Português</summary>
+    <description lang="en">Criado para vocês! Obrigado por estarem nas nossas vidas.</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -126,39 +79,6 @@
     <summary>HmmOK tudo para si</summary>
     <description>
 
-
-    </description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
-<addon id="plugin.video.pancas"
-       name="PancasTV"
-       version="1.2.1"
-       provider-name="Pancas">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.beautifulsoup" version="3.2.1"/>
-    <import addon="script.module.simple.downloader" version="0.9.4"/>
-    <import addon="script.module.beautifulsoup4" />
-    <import addon="script.module.requests" />
-    <import addon="script.module.httplib2" />
-    <import addon="script.module.liveresolver" version="0.1.24" optional="true"/>
-    <import addon="script.module.youtube.dl" optional="true"/>
-    <import addon="plugin.video.youtube" optional="true" />
-    <import addon="script.module.urlresolver" optional="false"/>
-    <import addon="script.module.simplejson" />
-    <import addon="script.module.livestreamer" optional="true"/>
-    <import addon="script.module.pyamf" optional="true"/>
-
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>TV para todos</summary>
-    <description>
-        Uma televisão ao clique de um dedo.
 
     </description>
     <platform>all</platform>
@@ -227,44 +147,48 @@
   </extension>
 </addon>
 
-<addon id="repository.SonsOfAnarchy" name="Sons Of Anarchy" version="1.0" provider-name="Sons Of Anarchy">
-	<extension point="xbmc.addon.repository" name="Sons Of Anarchy">
-		<info compressed="false">http://gaiabuilds.comli.com/zips/addons.xml</info>
-		<checksum>http://gaiabuilds.comli.com/zips/addons.xml.md5</checksum>
-		<datadir zip="true">http://gaiabuilds.comli.com/zips/</datadir>
+<addon id="teamtuga4ever.repository" name="Teamtuga4ever Repository" version="1.8" provider-name="Teamtuga4ever">
+	<extension point="xbmc.addon.repository" name="Teamtuga4ever Repository">
+	<dir>
+		<info compressed="false">http://repoteamtuga4ever.16mb.com/addons.xml</info>
+		<checksum>http://repoteamtuga4ever.16mb.com/addons.xml.md5</checksum>
+		<datadir zip="true">http://repoteamtuga4ever.16mb.com/instal/</datadir>
+	</dir>
+		<info compressed="false">https://raw.githubusercontent.com/tugateam/Repository/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/tugateam/Repository/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/tugateam/Repository/master/instal/</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary>Sons Of Anarchy Repository</summary>
-		<description>Blood Makes You Related… But Loyalty Makes You Family</description>
+		<summary>teamtuga4ever</summary>
+		<description>Teamtuga4ever Repository</description>
+         <disclaimer>Teamtuga4ever</disclaimer>
 		<platform>all</platform>
+                <website>https://www.facebook.com/groups/teamtuga4ever/</website>
 	</extension>
 </addon>
 
-<addon id="teamtuga4ever.repository" name="teamuga4ever" version="1.1a" provider-name="teamtuga4">
-	<extension point="xbmc.addon.repository" name="teamuga4ever repository">
-		<info compressed="false">http://raw.github.com/teamtuga4/teamtuga4ever.repository/master/addons.xml</info>
-		<checksum>http://raw.github.com/teamtuga4/teamtuga4ever.repository/master/addons.xml.md5</checksum>
-		<datadir zip="true">http://raw.github.com/teamtuga4/teamtuga4ever.repository/master/repo/</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Equipe TeamTuga4ever</summary>
-		<description>teamtuga4ever Repository</description>
-		<disclaimer></disclaimer>
-		<platform>all</platform>
-	</extension>
-</addon>
-
-<addon id="tvsupertuga.repository" name="[COLOR cyan]TV[/COLOR]-[COLOR red]SUPERTUGA[/COLOR].[COLOR limegreen]REPOSITORY[/COLOR]" version="0.0.6" provider-name="TVsupertuga">
-	<extension point="xbmc.addon.repository" name="tvsupertuga Repository">
-		<info compressed="false">http://tvsupertuga.net16.net/zips/addons.xml</info>
-		<checksum>http://tvsupertuga.net16.net/zips/addons.xml.md5</checksum>
-		<datadir zip="true">http://tvsupertuga.net16.net/instal/</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>tvsupertuga repository</summary>
-		<description></description>
-		<disclaimer></disclaimer>
-		<platform>all</platform>
-	</extension>
+<addon id="tvsupertuga.repository" name="[COLOR cyan]TV[/COLOR][COLOR red]supertuga[/COLOR].[COLOR limegreen]Repository[/COLOR]" version="0.0.8" provider-name="TVsupertuga">
+    <extension point="xbmc.addon.repository" name="TVsupertuga Repository">
+        <dir>
+            <info compressed="false">http://tvsupertuga.xyz/tvsupertuga.repository/addons.xml</info>
+            <checksum>http://tvsupertuga.xyz/tvsupertuga.repository/addons.xml.md5</checksum>
+            <datadir zip="true">http://tvsupertuga.xyz/tvsupertuga.repository/instal/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/PROJECTOTEAM/base/master/baseaddons.repository/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/PROJECTOTEAM/base/master/baseaddons.repository/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/PROJECTOTEAM/base/master/baseaddons.repository/instal/</datadir>
+        </dir>
+        <info compressed="false">https://raw.githubusercontent.com/repotvsupertuga/tvsupertuga.repository/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/repotvsupertuga/tvsupertuga.repository/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/repotvsupertuga/tvsupertuga.repository/instal/</datadir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+		<summary lang="pt">TVsupertuga </summary>
+		<description lang="pt">rdftgyhu</description>
+		<forum>http://tvsupertuga.forum-gratuito.com/</forum>
+		<website>https://www.facebook.com/TVsupertuga.PT/</website>
+        <platform>all</platform>
+    </extension>
 </addon>
 </addons>

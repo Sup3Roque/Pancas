@@ -1,2 +1,4 @@
-Versão 1.0.0
-Inicio do projecto Anima.PT
+v1.0.0
+Initial Release
+v1.0.1
+New structure, fork SOA Movies
