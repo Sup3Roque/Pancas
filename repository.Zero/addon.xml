@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.Zero" name="Zero repository" version="1.0.2" provider-name="Zero">
+	<extension point="xbmc.addon.repository" name="Zero Add-on Repository">
+		<info compressed="false">https://raw.githubusercontent.com/jennyrach/Zero/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/jennyrach/Zero/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/jennyrach/Zero/master/repo/</datadir>
+        
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+        </dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Zero [ 2018 ]</summary>
+		<description>Repositório com todos os ficheiros obrigatórios.
+[B][COLOR white]Para bom funcionamento deste addon é necessário instalar todos os ficheiros de todas as categorias aqui presentes.[/COLOR][/B]</description>
+		<disclaimer></disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>

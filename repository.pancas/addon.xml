@@ -1,9 +1,20 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.pancas" name="Pancas repository" version="1.0.7" provider-name="Pancas">
+<addon id="repository.pancas" name="Pancas repository" version="1.0.8" provider-name="Pancas">
 	<extension point="xbmc.addon.repository" name="Pancas Add-on Repository">
 		<info compressed="false">http://raw.github.com/Sup3Roque/Pancas/master/addons.xml</info>
 		<checksum>http://raw.github.com/Sup3Roque/Pancas/master/addons.xml.md5</checksum>
 		<datadir zip="true">http://raw.github.com/Sup3Roque/Pancas/master/repo/</datadir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/jennyrach/Zero/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jennyrach/Zero/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jennyrach/Zero/master/repo/</datadir>
+        </dir>
+
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary>Pancas Repo</summary>
