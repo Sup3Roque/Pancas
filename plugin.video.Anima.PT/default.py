@@ -1,7 +1,8 @@
-import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,base64,shutil,urlresolver,random
+import xbmc,xbmcaddon,xbmcgui,xbmcplugin,urllib,urllib2,os,re,sys,datetime,base64,shutil,random
 from resources.libs.common_addon import Addon
 from metahandler import metahandlers
 import resolveurl as urlresolver
+ 
 
 addon_id        = 'plugin.video.Anima.PT'
 addon           = Addon(addon_id, sys.argv)
@@ -199,7 +200,7 @@ def GETMULTI(name,url,iconimage):
 		quit()
 	else:
 		url = streamurl[select]
-		print url
+		#print url
 		if urlresolver.HostedMediaFile(url).valid_url(): stream_url = urlresolver.HostedMediaFile(url).resolve()
                 else: stream_url=url
                 liz = xbmcgui.ListItem(name,iconImage='DefaultVideo.png', thumbnailImage=iconimage)

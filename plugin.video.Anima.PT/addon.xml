@@ -6,6 +6,7 @@
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.beautifulsoup" version="3.2.1"/>
+    <import addon="script.module.resolveurl" version="5.0.00"/>
 	<import addon="script.module.simple.downloader" version="0.9.4"/>
 	<import addon="script.module.beautifulsoup4"/>
 	<import addon="script.module.requests"/>
