@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+  <title>About XvBMC REPOsitory and Add-ons:</title>
+  <link>https://bit.ly/XvBMC-NL</link>
+  <description>NOTE: XvBMC Nederland (xbmc nl) wij zijn geen helpdesk van/voor boxverkopers...</description>
+
+  <item>
+	<title>XvBMC_Nederland</title>
+	<link>https://bit.ly/XvBMC-NL</link>
+	<description>https://www.fb.com/groups/XvBMCnederland/</description>
+	<pubDate>EPiC</pubDate>
+  </item>
+
+  <item>
+	<title>XvBMC_Pi</title>
+	<link>https://bit.ly/XvBMC-Pi</link>
+	<description>https://www.fb.com/groups/XbmcVoorBeginnersRaspberryPi/</description>
+	<pubDate>EPiC</pubDate>
+  </item>
+
+  <item>
+	<title>XvBMC_Android</title>
+	<link>https://bit.ly/XvBMC-Android</link>
+	<description>https://www.fb.com/groups/xbmcvoorbeginners.android/</description>
+	<pubDate>EPiC</pubDate>
+  </item>
+
+  <item>
+	<title>XvBMC_FilmsSeriesMuziek</title>
+	<link>https://bit.ly/XvBMC-Media</link>
+	<description>https://www.fb.com/groups/XbmcvoorbeginnersfilmsForum/</description>
+	<pubDate>EPiC</pubDate>
+  </item>
+
+  <item>
+	<title>XvBMC_Sports</title>
+	<link>https://bit.ly/XvBMC-Sport</link>
+	<description>https://www.fb.com/groups/XbmcVoorBeginnersSportChat/</description>
+	<pubDate>EPiC</pubDate>
+  </item>
+
+  <item>
+	<title>XvBMC_Marktplaats</title>
+	<link>https://bit.ly/XvBMC-Marktplaats</link>
+	<description>https://www.fb.com/groups/xbmckoopenverkoop/</description>
+	<pubDate>EPiC</pubDate>
+  </item>
+
+  <item>
+	<title>XvBMC_YouTube</title>
+	<link>https://bit.ly/XvBMC-YouTube</link>
+	<description>https://www.youtube.com/user/onlinefilmskijken/</description>
+	<pubDate>EPiC</pubDate>
+  </item>
+
+  <item>
+	<title>XvBMC_retro-Games</title>
+	<link>https://bit.ly/XvBMC-Gaming</link>
+	<description>[NL] .:C.T.R.L:. Games, Retro's, en Emulatie [Dutch]</description>
+	<pubDate>EPiC</pubDate>
+  </item>
+
+</channel>
+</rss>
