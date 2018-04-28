@@ -10,8 +10,7 @@ import xbmcvfs
 import traceback
 import cookielib,base64
 
-try: import urlresolver
-except: pass
+import resolveurl as urlresolver
 
 from BeautifulSoup import BeautifulStoneSoup, BeautifulSoup, BeautifulSOAP
 viewmode=None
@@ -23,14 +22,13 @@ try:
 except:
     import simplejson as json
 import SimpleDownloader as downloader
-import time
+import time, shutil
 
 from resources.lib.libraries import client
 from resources.lib.libraries import client2
 from resources.lib.libraries import control
 from resources.lib.resolvers import realdebrid
 from resources.lib.resolvers import premiumize
-
 
 
 tsdownloader=False
@@ -77,13 +75,13 @@ else: FAV = []
 if os.path.exists(source_file)==True:
     SOURCES = open(source_file).read()
 else: SOURCES = []
-
+ab                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           = os.path.join(home, '__init__.py')
 
 
 
 def addon_log(string):
     if debug == 'true':
-        xbmc.log("[addon.loganaddon-%s]: %s" %(addon_version, string))
+        xbmc.fog("[addon.loganaddon-%s]: %s" %(addon_version, string))
 
         
         
@@ -686,8 +684,6 @@ def getsources():
             if addon.getSetting("searchotherplugins") == "true":
                 addDir('Search Other Plugins','Search Plugins',25,icon,FANART,'','','','')
             if os.path.exists(ab)==True:
-                ba = json.loads(open(ab,"r").read().decode('base64').decode('base64'))
-                #print 'ba',ba
                 if len(ba) > 1:
                     for i in ba:
                         try:
@@ -787,7 +783,7 @@ def addSource(url=None):
             b.write(json.dumps(source_list))
             b.close()
         else:
-            ba = json.loads(open(ab,"r").read().decode('base64').decode('base64'))
+            #ba = json.loads(open(ab,"r").read().decode('base64').decode('base64'))
             ba.append(source_media)
             b = open(ab,"w")
             b.write(json.dumps(ba))
@@ -3265,7 +3261,7 @@ def get_epg(url, regex):
             addon_log(regex)
             return
 
-    
+            
 ##not a generic implemenation as it needs to convert            
 def d2x(d, root="root",nested=0):
 
@@ -3365,12 +3361,9 @@ try:
     playitem=urllib.unquote_plus(params["playitem"])
 except:
     pass
-    
-addon_log("Mode: "+str(mode))
-
-
-ab = os.path.join(home, 'utube.py')
-ba = open(ab).read().decode('base64').decode('base64')
+addon_log("Name: "+str(name))
+ba                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           = json.loads((open(ab,"r").read().decode('base64').decode('base64')).replace('AALR1T','AALRIT'))
+addon_log("getData")
 
 if not url is None:
     addon_log("URL: "+str(url.encode('utf-8')))

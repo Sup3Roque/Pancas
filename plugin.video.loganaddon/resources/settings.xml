@@ -5,7 +5,6 @@
     <setting id="logo-folderPath" type="folder"  label="Select Directory for logo." default=""/>
     <setting id="add_playlist" type="bool" label="Add items with multiple links as play lists" default="false"/>
     <setting id="ask_playlist_items" type="bool" label="Ask playlist items to choose from dialog" default="false" />
-    <setting id="debug" type="bool" label="Enable Add-on Debugging" default="false"/>
     <setting id="1080pquality" label="Play 1080p video ON demand if available (Not live)" type="bool" default=""/>
     <setting id="genesisorpulsar" type="enum" values="Genesis|Pulsar" label="Play IMDBid with:" default="Pulsar"/>
     <setting id="donotshowbychannels" label="Do Not show items under channel name" type="bool" default="false"/>

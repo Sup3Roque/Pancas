@@ -28,9 +28,10 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.loganaddon" name="loganaddon TV" version="2.0" provider-name="Vitor Pereira e Pedro Selva">
+<addon id="plugin.video.loganaddon" name="loganaddon TV" version="2.3" provider-name="Vitor Pereira e Pedro Selva">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="script.module.resolveurl" version="5.0.00"/>
     <import addon="script.module.beautifulsoup" version="3.2.1"/>
     <import addon="script.module.simple.downloader" version="0.9.4"/>
     <import addon="script.module.beautifulsoup4" />
@@ -41,7 +42,8 @@
     <import addon="plugin.video.youtube" optional="false" />
     <import addon="script.module.urlresolver" optional="false"/>
     <import addon="script.module.simplejson" />
-     <import addon="script.module.livestreamer" optional="true"/>
+    <import addon="script.module.livestreamer" optional="true"/>
+    <import addon="script.module.metahandler" version="2.5.1"/>
   </requires>
   <extension point="xbmc.python.pluginsource" library="default.py">
     <provides>video</provides>
@@ -52,7 +54,12 @@
 
 
     </description>
-    <platform>all</platform>
+    <platform>all
+      <assets>
+          <icon>icon.png</icon>
+          <fanart>fanart.gif</fanart>
+      </assets>
+    </platform>
   </extension>
 </addon>
 
